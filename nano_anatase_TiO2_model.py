@@ -283,15 +283,6 @@ STPsludge_T = cp.FlowCompartment('Transformed in STPsludge', logInflows=True, lo
 #Definition of MMSW
 MMSW = cp.FlowCompartment('MMSW', logInflows=True, logOutflows=True, categories=['SolidWaste','PMCrel'])
 
-#Definition of PackW
-PackW = cp.FlowCompartment('PackW', logInflows=True, logOutflows=True, categories=['SolidWaste','PMCrel'])
-
-#Definition of WEEE
-WEEE = cp.FlowCompartment('WEEE', logInflows=True, logOutflows=True, categories=['SolidWaste','PMCrel'])
-
-#Definition of TextW
-TextW = cp.FlowCompartment('TextW', logInflows=True, logOutflows=True, categories=['SolidWaste','PMCrel'])
-
 #Definition of CDW
 CDW = cp.FlowCompartment('CDW', logInflows=True, logOutflows=True, categories=['SolidWaste', 'PMCrel'])
 
@@ -301,25 +292,6 @@ SolarWaste = cp.FlowCompartment('SolarWaste', logInflows=True, logOutflows=True,
 
 # In[14]:
 
-
-# Definition of Sorting_PackW
-Sorting_PackW = cp.FlowCompartment('Sorting_PackW', logInflows=True, logOutflows=True, categories=['Sorting', 'Sorting1'])
-
-# Definition of Sorting_WEEE
-Sorting_WEEE = cp.FlowCompartment('Sorting_WEEE', logInflows=True, logOutflows=True, categories=['Sorting', 'Sorting1'])
-
-# Definition of WEEE sorting subcompartments
-WEEE_NotExported = cp.FlowCompartment('WEEE_NotExported', logInflows=True, logOutflows=True, categories=['Sorting', 'Sorting2'])
-OtherWEEE = cp.FlowCompartment('OtherWEEE', logInflows=True, logOutflows=True, categories=['Sorting', 'Sorting2'])
-WEEE_Plastics = cp.FlowCompartment('WEEE_Plastics', logInflows=True, logOutflows=True, categories=['Sorting', 'Sorting2'])
-WEEE_Plastics_OA = cp.FlowCompartment('WEEE_Plastics_OA', logInflows=True, logOutflows=True, categories=['Sorting', 'Sorting2'])
-WEEE_Resorting = cp.FlowCompartment('WEEE_Resorting', logInflows=True, logOutflows=True, categories=['Sorting', 'Sorting2'])
-
-# Definition of Sorting_TextW
-Sorting_TextW = cp.FlowCompartment('Sorting_TextW', logInflows=True, logOutflows=True, categories=['Sorting', 'Sorting1'])
-
-# Definition of TextW sorting
-TextW_Resorting = cp.FlowCompartment('TextW_Resorting', logInflows=True, logOutflows=True, categories = ['Sorting', 'Sorting2'])
 
 # Definition of Sorting_CDW
 Sorting_CDW = cp.FlowCompartment('Sorting_CDW', logInflows=True, logOutflows=True, categories=['Sorting', 'Sorting1'])
@@ -336,10 +308,6 @@ Sorting_Disposal = cp.FlowCompartment('Sorting_Disposal', logInflows=True, logOu
 # In[15]:
 
 
-# Definition of Export
-SortWEEE_Export_P = cp.Sink('From Sorting WEEE to Export', logInflows=True, categories=['Export'])
-SortTextW_Export_P = cp.Sink('From Sorting Textile waste to Export', logInflows=True, categories=['Export'])
-
 # Definition of Landfill
 #ManufTextW_Landfill_P = cp.Sink('Product-embedded from Textile manufacturing waste to Landfill', logInflows=True, categories=['Landfill', 'Landfill_P', 'Product-embedded'])
 #ManufPlasW_Landfill_P = cp.Sink('Product-embedded from Plastics manufacturing waste to Landfill', logInflows=True, categories=['Landfill', 'Landfill_P', 'Product-embedded'])
@@ -351,8 +319,8 @@ CDW_Landfill_P = cp.Sink('Product-embedded from CDW to Landfill', logInflows=Tru
 SortCDWGlass_Landfill_P = cp.Sink('Product-embedded from Sorted CDW glass to Landfill', logInflows=True, categories=['Landfill', 'Landfill_P', 'Product-embedded'])
 SortCDWMiner_Landfill_P = cp.Sink('Product-embedded from Sorted CDW minerals to Landfill', logInflows=True, categories=['Landfill', 'Landfill_P', 'Product-embedded'])
 SortDisp_Landfill_P = cp.Sink('Product-embedded from other sorting to Landfill', logInflows=True, categories=['Landfill', 'Landfill_P', 'Product-embedded'])
-GranuPlas_Landfill_P = cp.Sink('Product-embedded from Plastic granulation to Landfill', logInflows=True, categories=['Landfill', 'Landfill_P', 'Product-embedded'])
-BaliText_Landfill_P = cp.Sink('Product-embedded from Textile baling to Landfill', logInflows=True, categories=['Landfill', 'Landfill_P', 'Product-embedded'])
+#GranuPlas_Landfill_P = cp.Sink('Product-embedded from Plastic granulation to Landfill', logInflows=True, categories=['Landfill', 'Landfill_P', 'Product-embedded'])
+#BaliText_Landfill_P = cp.Sink('Product-embedded from Textile baling to Landfill', logInflows=True, categories=['Landfill', 'Landfill_P', 'Product-embedded'])
 PuriSlag_Landfill_T = cp.Sink('Transformed from Purification slag to Landfill', logInflows=True, categories=['Landfill', 'Landfill_T', 'Transformed'])
 PuriSlag_Landfill_P = cp.Sink('Product-embedded from Purification slag to Landfill', logInflows=True, categories=['Landfill', 'Landfill_P', 'Product-embedded'])
 SortMiner_Landfill_P = cp.Sink('Product-embedded from Sorted minerals to Landfill', logInflows=True, categories=['Landfill', 'Landfill_P', 'Product-embedded'])
@@ -393,37 +361,12 @@ OnSiteSludge_T = cp.Sink('Transformed in OnsiteSludge', logInflows=True, categor
 
 # Definition of Reprocessing
 #define the waste categories in reprocesseing systems as product-embedded forms
-Reprocess_WEEE_NotExW_P=cp.FlowCompartment('Light bulbs waste to reprocess as product-embedded forms',logInflows=True, logOutflows=True, categories=['Reprocessing', 'Reprocess_P'])
-
-Reprocess_Plas_P=cp.FlowCompartment('Plastics waste to reprocess as product-embedded forms',logInflows=True, logOutflows=True, categories=['Reprocessing','Reprocess_P','Reprocessed Plastics'])
 Reprocess_Glass_P=cp.FlowCompartment('Glass waste to reprocess as product-embedded forms',logInflows=True, logOutflows=True, categories=['Reprocessing','Reprocess_P','Reprocessed Glass'])
-Reprocess_Metal_P=cp.FlowCompartment('Metal waste to reprocess as product-embedded forms',logInflows=True, logOutflows=True, categories=['Reprocessing','Reprocess_P','Reprocessed Metals'])
 Reprocess_Mineral_P=cp.FlowCompartment('Mineral waste to reprocess as product-embedded forms',logInflows=True, logOutflows=True, categories=['Reprocessing','Reprocess_P','Reprocessed Minerals'])
-Reprocess_Text_P=cp.FlowCompartment('Textile waste to reprocess as product-embedded forms',logInflows=True, logOutflows=True, categories=['Reprocessing','Reprocess_P','Reprocessed Textiles'])
+#Reprocess_Text_P=cp.FlowCompartment('Textile waste to reprocess as product-embedded forms',logInflows=True, logOutflows=True, categories=['Reprocessing','Reprocess_P','Reprocessed Textiles'])
 
 Reprocess_Solar_P=cp.Sink('Solar waste to reprocess as product-embedded forms',logInflows=True, categories=['Reprocessing','Reprocess_P','Reprocessed Solar waste'])
 
-# define plastic recycling system
-Washing_Plas=cp.FlowCompartment('Washing of plastics',logInflows=True, logOutflows=True, categories=['ReprWashPlas'])
-Melting_Plas=cp.FlowCompartment('Melting of plastics',logInflows=True, logOutflows=True, categories=['ReprMeltPlas'])
-Granulation_Plas=cp.FlowCompartment('Granulation of plastics',logInflows=True, logOutflows=True, categories=['ReprGranPlas'])
-Air_Plas= cp.FlowCompartment('ENM particles in Air from shredding plastics', logInflows=True, logOutflows=True,categories=['Air'])
-
-# define textile recycling system
-Washing_Text=cp.FlowCompartment('Washing of textiles',logInflows=True, logOutflows=True, categories=['ReprWashText'])
-Baling_Text=cp.FlowCompartment('ENM particles in baling as product-embedded forms with textiles',logInflows=True, logOutflows=True, categories=['ReprWashBali'])
-Air_Text= cp.FlowCompartment('Textile particles in Air from shredding textiles', logInflows=True,logOutflows=True, categories=['Air'])
-WW_Text = cp.FlowCompartment('ENM particles in Wastewater from washing textiles',logInflows=True,logOutflows=True, categories=['Wastewater'])
-
-# define metal recycling system
-Melting_Metal=cp.FlowCompartment('Melting of metals',logInflows=True, logOutflows=True, categories=['ReprMeltMeta'])
-Purification_Metal_P=cp.FlowCompartment('ENM as product-embedded forms in flows to purifaction of metals',logInflows=True, logOutflows=True, categories=['ReprPuriMeta', 'ReprPuriMeta_P'])
-Purification_Metal_T=cp.FlowCompartment('ENM as transformed forms in flows to purifaction of metals',logInflows=True, logOutflows=True, categories=['ReprPuriMeta', 'ReprPuriMeta_T'])
-#Moulding_Metal_T=cp.FlowCompartment('ENM as transformed forms in flows to moulding of metals',logInflows=True, logOutflows=True, categories=['Procedures in reprocessing system'])
-#Moulding_Metal_P=cp.FlowCompartment('ENM as product-embedded forms in flows to moulding of metals',logInflows=True, logOutflows=True, categories=['Procedures in reprocessing system'])
-Puri_slag_P=cp.FlowCompartment('ENM as product-embedded forms in flows to slags of metals',logInflows=True, logOutflows=True, categories=['ReprPuriSlag', 'ReprPuriSlag_P'])
-Puri_slag_T=cp.FlowCompartment('ENM as transformed forms in flows to slags of metals',logInflows=True, logOutflows=True, categories=['ReprPuriSlag', 'ReprPuriSlag_T'])
-Air_Metal= cp.FlowCompartment('ENM particles in Air from shredding metals', logInflows=True, logOutflows=True,categories=['Air'])
 
 # define glass recycling system
 Melting_Glass=cp.FlowCompartment('Melting of glass',logInflows=True, logOutflows=True, categories=['ReprMeltGlas'])
@@ -436,7 +379,7 @@ Sorting_Mineral=cp.FlowCompartment('Sorting/Sieving of mineral',logInflows=True,
 Air_Mineral= cp.FlowCompartment('ENM particles in Air from crushing minerals', logInflows=True,logOutflows=True, categories=['Air'])
 
 # define air NM
-Air_NM_Plas = cp.FlowCompartment('N and M particles in air from plastics',logInflows=True,logOutflows=True, categories=['Air_NM'])
+# Air_NM_Plas = cp.FlowCompartment('N and M particles in air from plastics',logInflows=True,logOutflows=True, categories=['Air_NM'])
 Air_NM = cp.FlowCompartment('N and M particles in air from metal/textile/mineral/glass',logInflows=True,logOutflows=True, categories=['Air_NM'])
 
 
@@ -449,12 +392,6 @@ RPWW_N = cp.FlowCompartment('Pristine in Wastewater from reprocessing', logInflo
 RPWW_M = cp.FlowCompartment('Matrix-embedded in Wastewater from reprocessing', logInflows=True, logOutflows=True, categories=['Wastewater', 'Wastewater_M', 'Matrix-embedded'])
 
 # define reuse compartment to store all final products from recycling factories
-GranuPlas_Reuse_P = cp.Sink('Product-embedded from Plastic granulation to Reuse', logInflows=True, categories=['Reuse', 'Reuse_P', 'Product-embedded'])
-BaliText_Reuse_P = cp.Sink('Product-embedded from Textile baling to Reuse', logInflows=True, categories=['Reuse', 'Reuse_P', 'Product-embedded'])
-PuriMetal_Reuse_P = cp.Sink('Product-embedded from Metal purification to Reuse', logInflows=True, categories=['Reuse', 'Reuse_P', 'Product-embedded'])
-PuriMetal_Reuse_T = cp.Sink('Transformed from Metal purification to Reuse', logInflows=True, categories=['Reuse', 'Reuse_T', 'Transformed'])
-PuriSlag_Reuse_P = cp.Sink('Product-embedded from Purification slag to Reuse', logInflows=True, categories=['Reuse', 'Reuse_P', 'Product-embedded'])
-PuriSlag_Reuse_T = cp.Sink('Transformed from Purification slag to Reuse', logInflows=True, categories=['Reuse', 'Reuse_T', 'Transformed'])
 MeltGlass_Reuse_T = cp.Sink('Transformed from Glass melting to Reuse', logInflows=True, categories=['Reuse', 'Reuse_T', 'Transformed'])
 SortMiner_Reuse_P = cp.Sink('Product-embedded from Sorted minerals to Reuse', logInflows=True, categories=['Reuse', 'Reuse_P', 'Product-embedded'])
 Filterash_Reuse_N = cp.Sink('Pristine from Filter ash to Reuse', logInflows=True, categories=['Reuse', 'Reuse_N', 'Pristine'])
@@ -508,42 +445,31 @@ compartmentList=[totalInflow,
                  NoSew_SW_N, NoSew_SW_T, NoSew_SW_M,
                  Sew_SW_N, Sew_SW_T, Sew_SW_M,
                                   
-                 MMSW, PackW, WEEE, TextW, CDW, SolarWaste,
+                 MMSW, CDW, SolarWaste,
                  
-                 Sorting_PackW, Sorting_WEEE, Sorting_TextW, Sorting_CDW,
+                 Sorting_CDW,
                  
-                 WEEE_NotExported, OtherWEEE, WEEE_Plastics, WEEE_Plastics_OA, WEEE_Resorting,
-                 TextW_Resorting,
+                
                  Sorting_CDW_Mineral, Sorting_CDW_Glass,
                  Sorting_Disposal,
                  
-                 GranuPlas_Reuse_P, BaliText_Reuse_P, PuriMetal_Reuse_P, PuriMetal_Reuse_T,
-                 PuriSlag_Reuse_P, PuriSlag_Reuse_T, MeltGlass_Reuse_T, SortMiner_Reuse_P,
+                 MeltGlass_Reuse_T, SortMiner_Reuse_P,
                  Filterash_Reuse_N, Filterash_Reuse_T, Bottomash_Reuse_N, Bottomash_Reuse_T,
                  
                  Air_NM, RPAir_N, RPAir_M,
                  RPWIP_P, RPWW_N, RPWW_M,
-                 Washing_Plas, Melting_Plas, Granulation_Plas, Air_Plas, Air_NM_Plas,
-                 Washing_Text, Baling_Text, Air_Text, WW_Text, 
-                 Melting_Metal, Purification_Metal_P, Purification_Metal_T,
-                 Puri_slag_P, Puri_slag_T,#Moulding_Metal_P,Moulding_Metal_T,
-                 Air_Metal, 
                  Melting_Glass, Air_Glass, 
                  Sorting_Mineral, Air_Mineral, 
                  
-                 Reprocess_WEEE_NotExW_P,
-                 Reprocess_Plas_P, Reprocess_Text_P, Reprocess_Glass_P, Reprocess_Metal_P, Reprocess_Mineral_P, 
-                 Reprocess_Solar_P,
+                 Reprocess_Glass_P, Reprocess_Mineral_P, Reprocess_Solar_P,
                  
                  WIP_N, WIP_M, WIP_P, WIP_T, Burning_N, Burning_T, 
                  Bottomash_N, Bottomash_T, Flyash_N, Flyash_T, Filterash_N, Filterash_T,
                  WIP_Air_N, WIP_Air_T,
                  
-                 SortWEEE_Export_P, SortTextW_Export_P,
                  
-                 STPSlud_Landfill_N, STPSlud_Landfill_M, STPSlud_Landfill_T,
+                STPSlud_Landfill_N, STPSlud_Landfill_M, STPSlud_Landfill_T,
                  MMSW_Landfill_P, CDW_Landfill_P, SortCDWGlass_Landfill_P, SortCDWMiner_Landfill_P, SortDisp_Landfill_P,
-                 GranuPlas_Landfill_P, BaliText_Landfill_P, PuriSlag_Landfill_T, PuriSlag_Landfill_P,
                  SortMiner_Landfill_P, Filterash_Landfill_N, Filterash_Landfill_T, Bottomash_Landfill_N, Bottomash_Landfill_T,
                  
                  STsoil_N, STsoil_M, STsoil_T,
@@ -1414,196 +1340,6 @@ MMSW.transfers = [cp.TimeDependendDistributionTransfer([MSW_LF_y0,
                   cp.ConstTransfer(1, WIP_P, priority=1)]
 
 
-# In[49]:
-
-
-# Packaging Waste
-
-# Statusbericht 20115, for year 2014: 44.32% goes to MMSW in Austria.
-# Mean of this value for Europe in year 2014: 21.3% (this model).
-# It results a scaling factor of 2.081.
-# The overall distributions must not exceed 1, so 0.481 (=1/2.081) before multiplication by 2.081.
-
-PW_MW_y0_data = (tf.TriangTruncDet(0.2925, 0.52, 0.7475, s, 0, 0.481))
-PW_MW_y1_data = (tf.TriangTruncDet(0.2998, 0.5, 0.7003, s, 0, 0.481))
-PW_MW_y2_data = (tf.TriangTruncDet(0.3030, 0.476, 0.6490, s, 0, 0.481))
-PW_MW_y3_data = (tf.TriangTruncDet(0.3488, 0.451, 0.5532, s, 0, 0.481))
-PW_MW_y4_data = (tf.TriangTruncDet(0.3516, 0.427, 0.5024, s, 0, 0.481))
-PW_MW_y5_data = (tf.TriangTruncDet(0.3513, 0.42, 0.4887, s, 0, 0.481))
-PW_MW_y6_data = (nr.triangular(0.3457, 0.407, 0.4683, s))
-PW_MW_y7_data = (nr.triangular(0.2887, 0.365, 0.4413, s))
-PW_MW_y8_data = (nr.triangular(0.2358, 0.322, 0.4082, s))
-PW_MW_y9_data = (nr.triangular(0.2166, 0.28, 0.3434, s))
-PW_MW_y10_data = (nr.triangular(0.1952, 0.237, 0.2788, s))
-PW_MW_y11_data = (nr.triangular(0.1869, 0.227, 0.2671, s))
-PW_MW_y12_data = (nr.triangular(0.1771, 0.215, 0.2529, s))
-PW_MW_y13_data = (nr.triangular(0.1163, 0.208, 0.2997, s))
-PW_MW_y14_data = (nr.triangular(0.1191, 0.213, 0.3069, s))
-PW_MW_y15_data = (nr.triangular(0.1191, 0.213, 0.3069, s))
-PW_MW_y16_data = (nr.triangular(0.0718, 0.141, 0.2102, s))
-PW_MW_y17_data = (nr.triangular(0.0585, 0.117, 0.1755, s))
-PW_MW_y18_data = (nr.triangular(0.0465, 0.093, 0.1395, s))
-PW_MW_y19_data = (nr.triangular(0.0345, 0.069, 0.1035, s))
-PW_MW_y20_data = (nr.triangular(0.023, 0.046, 0.069, s))
-
-PW_MW_y0 = cp.TransferDistribution(nr.choice, [PW_MW_y0_data])
-PW_MW_y1 = cp.TransferDistribution(nr.choice, [PW_MW_y1_data])
-PW_MW_y2 = cp.TransferDistribution(nr.choice, [PW_MW_y2_data])
-PW_MW_y3 = cp.TransferDistribution(nr.choice, [PW_MW_y3_data])
-PW_MW_y4 = cp.TransferDistribution(nr.choice, [PW_MW_y4_data])
-PW_MW_y5 = cp.TransferDistribution(nr.choice, [PW_MW_y5_data])
-PW_MW_y6 = cp.TransferDistribution(nr.choice, [PW_MW_y6_data])
-PW_MW_y7 = cp.TransferDistribution(nr.choice, [PW_MW_y7_data])
-PW_MW_y8 = cp.TransferDistribution(nr.choice, [PW_MW_y8_data])
-PW_MW_y9 = cp.TransferDistribution(nr.choice, [PW_MW_y9_data])
-PW_MW_y10 = cp.TransferDistribution(nr.choice, [PW_MW_y10_data])
-PW_MW_y11 = cp.TransferDistribution(nr.choice, [PW_MW_y11_data])
-PW_MW_y12 = cp.TransferDistribution(nr.choice, [PW_MW_y12_data])
-PW_MW_y13 = cp.TransferDistribution(nr.choice, [PW_MW_y13_data])
-PW_MW_y14 = cp.TransferDistribution(nr.choice, [PW_MW_y14_data])
-PW_MW_y15 = cp.TransferDistribution(nr.choice, [PW_MW_y15_data])
-PW_MW_y16 = cp.TransferDistribution(nr.choice, [PW_MW_y16_data])
-PW_MW_y17 = cp.TransferDistribution(nr.choice, [PW_MW_y17_data])
-PW_MW_y18 = cp.TransferDistribution(nr.choice, [PW_MW_y18_data])
-PW_MW_y19 = cp.TransferDistribution(nr.choice, [PW_MW_y19_data])
-PW_MW_y20 = cp.TransferDistribution(nr.choice, [PW_MW_y20_data])
-
-PackW.transfers = [cp.TimeDependendDistributionTransfer([PW_MW_y0,
-                                                         PW_MW_y1,PW_MW_y2,PW_MW_y3,PW_MW_y4,PW_MW_y5,
-                                                         PW_MW_y6,PW_MW_y7,PW_MW_y8,PW_MW_y9,PW_MW_y10,
-                                                         PW_MW_y11,PW_MW_y12,PW_MW_y13,PW_MW_y14,PW_MW_y15,
-                                                         PW_MW_y16,PW_MW_y17,PW_MW_y18,PW_MW_y19,PW_MW_y20],
-                                                         MMSW, PackW, priority=2),
-                   cp.ConstTransfer(1, Sorting_PackW, priority=1)]
-
-
-# In[50]:
-
-
-# WEEE
-
-# Eurostat, for year 2014: 93.16% goes to sorting in Austria.
-# Mean of this value for Europe in year 2014: 40% (this model).
-# It results a scaling factor of 2.329.
-# The overall distributions must not exceed 1, so 0.429 (=1/2.329) before multiplication by 2.329
-
-WE_S_y0_data = (nr.triangular(0.015, 0.03, 0.045, s))
-WE_S_y1_data = (nr.triangular(0.0335, 0.067, 0.1005, s))
-WE_S_y2_data = (nr.triangular(0.0515, 0.103, 0.1545, s))
-WE_S_y3_data = (nr.triangular(0.07, 0.14, 0.21, s))
-WE_S_y4_data = (nr.triangular(0.0907, 0.177, 0.2633, s))
-WE_S_y5_data = (tf.TriangTruncDet(0.1766, 0.314, 0.4514, s, 0, 0.429))
-WE_S_y6_data = (tf.TriangTruncDet(0.1912, 0.319, 0.4468, s, 0, 0.429))
-WE_S_y7_data = (nr.triangular(0.2231, 0.325, 0.4269, s))
-WE_S_y8_data = (nr.triangular(0.2718, 0.33, 0.3882, s))
-WE_S_y9_data = (nr.triangular(0.273, 0.35, 0.427, s))
-WE_S_y10_data = (tf.TriangTruncDet(0.3095, 0.37, 0.4305, s, 0, 0.429))
-WE_S_y11_data = (tf.TriangTruncDet(0.2566, 0.395, 0.5334, s, 0, 0.429))
-WE_S_y12_data = (tf.TriangTruncDet(0.2363, 0.42, 0.6038, s, 0, 0.429))
-WE_S_y13_data = (tf.TriangTruncDet(0.2663, 0.41, 0.5537, s, 0, 0.429))
-WE_S_y14_data = (tf.TriangTruncDet(0.3346, 0.4, 0.4654, s, 0, 0.429))
-WE_S_y15_data = (tf.TriangTruncDet(0.3582, 0.49, 0.6218, s, 0, 0.429))
-WE_S_y16_data = (tf.TriangTruncDet(0.3628, 0.58, 0.7972, s, 0, 0.429))
-WE_S_y17_data = (tf.TriangTruncDet(0.3819, 0.67, 0.9581, s, 0, 0.429))
-WE_S_y18_data = (tf.TriangTruncDet(0.3819, 0.67, 0.9581, s, 0, 0.429))
-WE_S_y19_data = (tf.TriangTruncDet(0.3819, 0.67, 0.9581, s, 0, 0.429))
-WE_S_y20_data = (tf.TriangTruncDet(0.3819, 0.67, 0.9581, s, 0, 0.429))
-
-WE_S_y0 = cp.TransferDistribution(nr.choice, [WE_S_y0_data])
-WE_S_y1 = cp.TransferDistribution(nr.choice, [WE_S_y1_data])
-WE_S_y2 = cp.TransferDistribution(nr.choice, [WE_S_y2_data])
-WE_S_y3 = cp.TransferDistribution(nr.choice, [WE_S_y3_data])
-WE_S_y4 = cp.TransferDistribution(nr.choice, [WE_S_y4_data])
-WE_S_y5 = cp.TransferDistribution(nr.choice, [WE_S_y5_data])
-WE_S_y6 = cp.TransferDistribution(nr.choice, [WE_S_y6_data])
-WE_S_y7 = cp.TransferDistribution(nr.choice, [WE_S_y7_data])
-WE_S_y8 = cp.TransferDistribution(nr.choice, [WE_S_y8_data])
-WE_S_y9 = cp.TransferDistribution(nr.choice, [WE_S_y9_data])
-WE_S_y10 = cp.TransferDistribution(nr.choice, [WE_S_y10_data])
-WE_S_y11 = cp.TransferDistribution(nr.choice, [WE_S_y11_data])
-WE_S_y12 = cp.TransferDistribution(nr.choice, [WE_S_y12_data])
-WE_S_y13 = cp.TransferDistribution(nr.choice, [WE_S_y13_data])
-WE_S_y14 = cp.TransferDistribution(nr.choice, [WE_S_y14_data])
-WE_S_y15 = cp.TransferDistribution(nr.choice, [WE_S_y15_data])
-WE_S_y16 = cp.TransferDistribution(nr.choice, [WE_S_y16_data])
-WE_S_y17 = cp.TransferDistribution(nr.choice, [WE_S_y17_data])
-WE_S_y18 = cp.TransferDistribution(nr.choice, [WE_S_y18_data])
-WE_S_y19 = cp.TransferDistribution(nr.choice, [WE_S_y19_data])
-WE_S_y20 = cp.TransferDistribution(nr.choice, [WE_S_y20_data])
-
-
-WEEE.transfers = [cp.TimeDependendDistributionTransfer([WE_S_y0,
-                                                        WE_S_y1,WE_S_y2,WE_S_y3,WE_S_y4,WE_S_y5,
-                                                        WE_S_y6,WE_S_y7,WE_S_y8,WE_S_y9,WE_S_y10,
-                                                        WE_S_y11,WE_S_y12,WE_S_y13,WE_S_y14,WE_S_y15,
-                                                        WE_S_y16,WE_S_y17,WE_S_y18,WE_S_y19,WE_S_y20],
-                                                        Sorting_WEEE, WEEE, priority=2),
-                   cp.ConstTransfer(1, MMSW, priority=1)]
-
-
-# In[51]:
-
-
-# Textile Waste      
-
-# Eurostat, for year 2014: 28.82% goes to sorting in the UK.
-# Mean of this value for Europe in year 2014: 30% (this model).
-# It results a scaling factor of 0.961.
-             
-TW_S_y0_data = (nr.triangular(0.024, 0.048, 0.072, s))
-TW_S_y1_data = (nr.triangular(0.0345, 0.069, 0.1035, s))
-TW_S_y2_data = (nr.triangular(0.0455, 0.091, 0.1365, s))
-TW_S_y3_data = (nr.triangular(0.0574, 0.112, 0.1666, s))
-TW_S_y4_data = (nr.triangular(0.1515, 0.19, 0.2285, s))
-TW_S_y5_data = (nr.triangular(0.1486, 0.198, 0.2474, s))
-TW_S_y6_data = (nr.triangular(0.1443, 0.205, 0.2657, s))
-TW_S_y7_data = (nr.triangular(0.1400, 0.213, 0.2860, s))
-TW_S_y8_data = (nr.triangular(0.1343, 0.22, 0.3057, s))
-TW_S_y9_data = (nr.triangular(0.1513, 0.228, 0.3047, s))
-TW_S_y10_data = (nr.triangular(0.1685, 0.235, 0.3015, s))
-TW_S_y11_data = (nr.triangular(0.1872, 0.243, 0.2988, s))
-TW_S_y12_data = (nr.triangular(0.2059, 0.25, 0.2941, s))
-TW_S_y13_data = (nr.triangular(0.2139, 0.275, 0.3361, s))
-TW_S_y14_data = (nr.triangular(0.2197, 0.3, 0.3804, s))
-TW_S_y15_data = (nr.triangular(0.2556, 0.325, 0.3944, s))
-TW_S_y16_data = (nr.triangular(0.2928, 0.35, 0.4072, s))
-TW_S_y17_data = (nr.triangular(0.3133, 0.405, 0.4967, s))
-TW_S_y18_data = (nr.triangular(0.3268, 0.46, 0.5932, s))
-TW_S_y19_data = (nr.triangular(0.3850, 0.515, 0.6450, s))
-TW_S_y20_data = (nr.triangular(0.4546, 0.57, 0.6854, s))
-
-TW_S_y0 = cp.TransferDistribution(nr.choice, [TW_S_y0_data])
-TW_S_y1 = cp.TransferDistribution(nr.choice, [TW_S_y1_data])
-TW_S_y2 = cp.TransferDistribution(nr.choice, [TW_S_y2_data])
-TW_S_y3 = cp.TransferDistribution(nr.choice, [TW_S_y3_data])
-TW_S_y4 = cp.TransferDistribution(nr.choice, [TW_S_y4_data])
-TW_S_y5 = cp.TransferDistribution(nr.choice, [TW_S_y5_data])
-TW_S_y6 = cp.TransferDistribution(nr.choice, [TW_S_y6_data])
-TW_S_y7 = cp.TransferDistribution(nr.choice, [TW_S_y7_data])
-TW_S_y8 = cp.TransferDistribution(nr.choice, [TW_S_y8_data])
-TW_S_y9 = cp.TransferDistribution(nr.choice, [TW_S_y9_data])
-TW_S_y10 = cp.TransferDistribution(nr.choice, [TW_S_y10_data])
-TW_S_y11 = cp.TransferDistribution(nr.choice, [TW_S_y11_data])
-TW_S_y12 = cp.TransferDistribution(nr.choice, [TW_S_y12_data])
-TW_S_y13 = cp.TransferDistribution(nr.choice, [TW_S_y13_data])
-TW_S_y14 = cp.TransferDistribution(nr.choice, [TW_S_y14_data])
-TW_S_y15 = cp.TransferDistribution(nr.choice, [TW_S_y15_data])
-TW_S_y16 = cp.TransferDistribution(nr.choice, [TW_S_y16_data])
-TW_S_y17 = cp.TransferDistribution(nr.choice, [TW_S_y17_data])
-TW_S_y18 = cp.TransferDistribution(nr.choice, [TW_S_y18_data])
-TW_S_y19 = cp.TransferDistribution(nr.choice, [TW_S_y19_data])
-TW_S_y20 = cp.TransferDistribution(nr.choice, [TW_S_y20_data])
-
-
-TextW.transfers = [cp.TimeDependendDistributionTransfer([TW_S_y0,
-                                                         TW_S_y1,TW_S_y2,TW_S_y3,TW_S_y4,TW_S_y5,
-                                                         TW_S_y6,TW_S_y7,TW_S_y8,TW_S_y9,TW_S_y10,
-                                                         TW_S_y11,TW_S_y12,TW_S_y13,TW_S_y14,TW_S_y15,
-                                                         TW_S_y16,TW_S_y17,TW_S_y18,TW_S_y19,TW_S_y20],
-                                                         Sorting_TextW, TextW, priority=2),
-                   cp.ConstTransfer(1, MMSW, priority=1)]
-
-
 # In[52]:
 
 
@@ -1655,46 +1391,6 @@ CDW.transfers = [cp.TimeDependendDistributionTransfer([CDW_LF_y0,
 
 ### SAME AS FOR EUROPE
 
-# Packaging Waste
-Sorting_PackW.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
-
-# WEEE
-Exports = np.concatenate([nr.triangular(0.055, 0.11, 0.11, int(0.134*s)), nr.uniform(0.11, 0.23, int(0.585*s)), nr.triangular(0.23, 0.23, 0.28, int(0.345*s))])
-Sorting_WEEE.transfers = [cp.RandomChoiceTransfer(Exports, SortWEEE_Export_P, priority =2),
-                          cp.ConstTransfer(1, WEEE_NotExported, priority=1)]
-                          
-WEEE_NotExported.transfers = [cp.StochasticTransfer(nr.triangular, [0.015, 0.03, 0.045], Reprocess_WEEE_NotExW_P, priority =2), # representing light bulbs going all to reprocessing
-                             cp.ConstTransfer(1, OtherWEEE, priority =1)]
-                           
-OtherWEEE.transfers = [cp.StochasticTransfer(nr.triangular, [0.02, 0.04, 0.06], Reprocess_Metal_P, priority =2), #representing metals going all to reprocessing
-                       cp.StochasticTransfer(nr.triangular, [0.035, 0.07, 0.105], WEEE_Plastics, priority=2),
-                       cp.ConstTransfer(1, Sorting_Disposal, priority=1)] #representing other materials going all to WIP or landfill
-
-WEEE_Plastics.transfers = [cp.StochasticTransfer(nr.triangular, [0.035, 0.07, 0.105], Reprocess_Plas_P, priority=2), #0representing Mobile phones
-                           cp.ConstTransfer(1, WEEE_Plastics_OA, priority=1)]
-
-Resorting = np.concatenate([nr.triangular(0.15, 0.3, 0.3, int(0.273*s)), nr.uniform(0.3, 0.4, int(0.364*s)), nr.triangular(0.4, 0.4, 0.6, int(0.364*s))])                           
-WEEE_Plastics_OA.transfers = [ cp.RandomChoiceTransfer(Resorting, WEEE_Resorting, priority=2),
-                               cp.ConstTransfer(1, WIP_P, priority=1)]
-
-WEEE_Resorting.transfers = [cp.StochasticTransfer(nr.triangular, [0.05, 0.1, 0.15], Sorting_Disposal, priority=2),
-                            cp.ConstTransfer(1, Reprocess_Plas_P, priority=1)]
-
-
-# Textile Waste (Clothing)    
-TextW_Ex = np.concatenate([nr.triangular(0.15, 0.3, 0.3, int(0.273*s)), nr.uniform(0.3, 0.4, int(0.364*s)), nr.triangular(0.4, 0.4, 0.6, int(0.364*s))])
-TextW_RU = np.concatenate([nr.triangular(0.015, 0.03, 0.03, int(0.073*s)), nr.uniform(0.03, 0.1, int(0.683*s)), nr.triangular(0.1, 0.1, 0.15, int(0.244*s))])
-TextW_WIPLF = np.concatenate([nr.triangular(0.05, 0.1, 0.1, int(0.222*s)), nr.uniform(0.1, 0.15, int(0.444*s)), nr.triangular(0.15, 0.15, 0.225, int(0.333*s))])
-Sorting_TextW.transfers = [cp.RandomChoiceTransfer(TextW_Ex, SortTextW_Export_P, priority=2),
-                           cp.RandomChoiceTransfer(TextW_WIPLF, Sorting_Disposal, priority=2), # goes to incineration/landfilling in same shares as MMSW
-                           cp.ConstTransfer(1, TextW_Resorting, priority=1)]
-                             
-TextW_Rpr = np.concatenate([nr.triangular(0.2, 0.4, 0.4, int(0.222*s)), nr.uniform(0.4, 0.6, int(0.444*s)), nr.triangular(0.6, 0.6, 0.9, int(0.333*s))])
-TextW_CR = np.concatenate([nr.triangular(0.25, 0.5, 0.5, int(0.333*s)), nr.uniform(0.5, 0.6, int(0.267*s)), nr.triangular(0.6, 0.6, 0.9, int(0.4*s))])
-TextW_Resorting.transfers = [cp.RandomChoiceTransfer(TextW_Rpr, Reprocess_Text_P, priority=1),
-                             cp.RandomChoiceTransfer(TextW_CR, Sorting_Disposal, priority=1)] #Cleaning rags being disposed in same shares as MMSW
-
-
 # CDW   
 ## The categories (materials) of CDW are distributed here.
 # For TiO2, we have:
@@ -1744,261 +1440,6 @@ Sorting_Disposal.transfers = [cp.TimeDependendDistributionTransfer([MSW_LF_y0,
    '''
 # all these processes were kept static, so there are no time-dependent transfers
 # thus the coefficient of variance is kept to 50%  
-
-
-# In[58]:
-
-
-'''Reprocess_WEEE_NotExW_P'''
-# this represent the light bulbs, only the mercury containing light bulbs are considered to be recycled
-# after discussion with Bernd and Vero, we sepeculated that all ENMs are contained in the glass part
-Reprocess_WEEE_NotExW_P.transfers=[cp.ConstTransfer(1, Reprocess_Glass_P, priority=1)] 
-
-
-# In[59]:
-
-
-'''Reprocess_Plas_P'''
-# Reprocessing Procedures
-Reprocess_Plas_P.transfers =[cp.StochasticTransfer(nr.triangular, [0.0001, 0.0002, 0.0003], Air_Plas, priority=2),
-                             cp.ConstTransfer(1, Washing_Plas, priority=1)]
-  
-Washing_Plas.transfers=[cp.ConstTransfer(1, Melting_Plas, priority=1)] #flow to melting as product-embedded forms
-
-Melting_Plas.transfers=[cp.ConstTransfer(1, Granulation_Plas, priority=1)] #flow to melting as product-embedded forms
-
-#From granulation to landfill   
-Granu_Plas_LF_y0 = cp.TransferDistribution(nr.triangular, [0.0471, 0.0790, 0.1109])
-Granu_Plas_LF_y1 = cp.TransferDistribution(nr.triangular, [0.0471, 0.0790, 0.1109])
-Granu_Plas_LF_y2 = cp.TransferDistribution(nr.triangular, [0.0471, 0.0790, 0.1109])
-Granu_Plas_LF_y3 = cp.TransferDistribution(nr.triangular, [0.0471, 0.0790, 0.1109])
-Granu_Plas_LF_y4 = cp.TransferDistribution(nr.triangular, [0.0471, 0.0790, 0.1109])
-Granu_Plas_LF_y5 = cp.TransferDistribution(nr.triangular, [0.0592, 0.0790, 0.0988])
-Granu_Plas_LF_y6 = cp.TransferDistribution(nr.triangular, [0.0592, 0.0790, 0.0988])
-Granu_Plas_LF_y7 = cp.TransferDistribution(nr.triangular, [0.0592, 0.0790, 0.0988])
-Granu_Plas_LF_y8 = cp.TransferDistribution(nr.triangular, [0.0592, 0.0790, 0.0988])
-Granu_Plas_LF_y9 = cp.TransferDistribution(nr.triangular, [0.0592, 0.0790, 0.0988])
-Granu_Plas_LF_y10 = cp.TransferDistribution(nr.triangular, [0.0610, 0.0790, 0.0970])
-Granu_Plas_LF_y11 = cp.TransferDistribution(nr.triangular, [0.0628, 0.0814, 0.0999])
-Granu_Plas_LF_y12 = cp.TransferDistribution(nr.triangular, [0.0646, 0.0837, 0.1028])
-Granu_Plas_LF_y13 = cp.TransferDistribution(nr.triangular, [0.0625, 0.0810, 0.0994])
-Granu_Plas_LF_y14 = cp.TransferDistribution(nr.triangular, [0.0604, 0.0782, 0.0961])
-Granu_Plas_LF_y15 = cp.TransferDistribution(nr.triangular, [0.0619, 0.0802, 0.0985])
-Granu_Plas_LF_y16 = cp.TransferDistribution(nr.triangular, [0.0634, 0.0822, 0.1009])
-Granu_Plas_LF_y17 = cp.TransferDistribution(nr.triangular, [0.0616, 0.0822, 0.1028])
-Granu_Plas_LF_y18 = cp.TransferDistribution(nr.triangular, [0.0616, 0.0822, 0.1028])
-Granu_Plas_LF_y19 = cp.TransferDistribution(nr.triangular, [0.0616, 0.0822, 0.1028])
-Granu_Plas_LF_y20 = cp.TransferDistribution(nr.triangular, [0.0616, 0.0822, 0.1028])
-
-#From granulation to incineration
-Granu_Plas_WIP_y0 = cp.TransferDistribution(nr.triangular, [0.0057, 0.0096, 0.0134])
-Granu_Plas_WIP_y1 = cp.TransferDistribution(nr.triangular, [0.0057, 0.0096, 0.0134])
-Granu_Plas_WIP_y2 = cp.TransferDistribution(nr.triangular, [0.0057, 0.0096, 0.0134])
-Granu_Plas_WIP_y3 = cp.TransferDistribution(nr.triangular, [0.0057, 0.0096, 0.0134])
-Granu_Plas_WIP_y4 = cp.TransferDistribution(nr.triangular, [0.0057, 0.0096, 0.0134])
-Granu_Plas_WIP_y5 = cp.TransferDistribution(nr.triangular, [0.0072, 0.0096, 0.0120])
-Granu_Plas_WIP_y6 = cp.TransferDistribution(nr.triangular, [0.0072, 0.0096, 0.0120])
-Granu_Plas_WIP_y7 = cp.TransferDistribution(nr.triangular, [0.0072, 0.0096, 0.0120])
-Granu_Plas_WIP_y8 = cp.TransferDistribution(nr.triangular, [0.0072, 0.0096, 0.0120])
-Granu_Plas_WIP_y9 = cp.TransferDistribution(nr.triangular, [0.0072, 0.0096, 0.0120])
-Granu_Plas_WIP_y10 = cp.TransferDistribution(nr.triangular, [0.0074, 0.0096, 0.0118])
-Granu_Plas_WIP_y11 = cp.TransferDistribution(nr.triangular, [0.0056, 0.0072, 0.0089])
-Granu_Plas_WIP_y12 = cp.TransferDistribution(nr.triangular, [0.0038, 0.0049, 0.0060])
-Granu_Plas_WIP_y13 = cp.TransferDistribution(nr.triangular, [0.0059, 0.0076, 0.0094])
-Granu_Plas_WIP_y14 = cp.TransferDistribution(nr.triangular, [0.0080, 0.0104, 0.0127])
-Granu_Plas_WIP_y15 = cp.TransferDistribution(nr.triangular, [0.0065, 0.0084, 0.0103])
-Granu_Plas_WIP_y16 = cp.TransferDistribution(nr.triangular, [0.0050, 0.0064, 0.0079])
-Granu_Plas_WIP_y17 = cp.TransferDistribution(nr.triangular, [0.0048, 0.0064, 0.0081])
-Granu_Plas_WIP_y18 = cp.TransferDistribution(nr.triangular, [0.0048, 0.0064, 0.0081])
-Granu_Plas_WIP_y19 = cp.TransferDistribution(nr.triangular, [0.0048, 0.0064, 0.0081])
-Granu_Plas_WIP_y20 = cp.TransferDistribution(nr.triangular, [0.0048, 0.0064, 0.0081])
-
-
-Granulation_Plas.transfers =[cp.TimeDependendDistributionTransfer([Granu_Plas_LF_y0,
-                                                                   Granu_Plas_LF_y1,Granu_Plas_LF_y2,Granu_Plas_LF_y3,Granu_Plas_LF_y4,Granu_Plas_LF_y5,
-                                                                   Granu_Plas_LF_y6,Granu_Plas_LF_y7,Granu_Plas_LF_y8,Granu_Plas_LF_y9,Granu_Plas_LF_y10,
-                                                                   Granu_Plas_LF_y11,Granu_Plas_LF_y12,Granu_Plas_LF_y13,Granu_Plas_LF_y14,Granu_Plas_LF_y15,
-                                                                   Granu_Plas_LF_y16,Granu_Plas_LF_y17,Granu_Plas_LF_y18,Granu_Plas_LF_y19,Granu_Plas_LF_y20],
-                                                                  GranuPlas_Landfill_P, Granulation_Plas, priority=2),
-                             cp.TimeDependendDistributionTransfer([Granu_Plas_WIP_y0,
-                                                                   Granu_Plas_WIP_y1,Granu_Plas_WIP_y2,Granu_Plas_WIP_y3,Granu_Plas_WIP_y4,Granu_Plas_WIP_y5,
-                                                                   Granu_Plas_WIP_y6,Granu_Plas_WIP_y7,Granu_Plas_WIP_y8,Granu_Plas_WIP_y9,Granu_Plas_WIP_y10,
-                                                                   Granu_Plas_WIP_y11,Granu_Plas_WIP_y12,Granu_Plas_WIP_y13,Granu_Plas_WIP_y14,Granu_Plas_WIP_y15,
-                                                                   Granu_Plas_WIP_y16,Granu_Plas_WIP_y17,Granu_Plas_WIP_y18,Granu_Plas_WIP_y19,Granu_Plas_WIP_y20],
-                                                                  RPWIP_P, Granulation_Plas, priority=2),
-                            cp.ConstTransfer(1, GranuPlas_Reuse_P, priority=1)]
-
-#Release form                        
-Air_Plas.transfers=[cp.StochasticTransfer(tf.TriangTrunc, [0.2, 1.07, 1, 0, 1], Air_NM_Plas,priority=2),
-                    cp.ConstTransfer(1, RPAir_M, priority=1)]
-
-Air_NM_Plas.transfers=[cp.StochasticTransfer(nr.triangular,[0.0959, 0.1535, 0.2211], RPAir_N, priority=2),
-                  cp.ConstTransfer(1, RPAir_M, priority=1)]
-
-
-# In[60]:
-
-
-'''Reprocess_Text_P'''
-# from shredding textiles to air
-Reprocess_Text_P.transfers=[cp.StochasticTransfer(tf.TriangTrunc, [0.02, 1.47, 1, 0, 1], Air_Text, priority=2),
-                            cp.ConstTransfer(1, Washing_Text, priority=1)]
-
-# from washing textiles to WW
-Washing_Text.transfers=[cp.StochasticTransfer(nr.triangular, [0.0006, 0.0009, 0.0012], WW_Text, priority=2),
-                            cp.ConstTransfer(1, Baling_Text, priority=1)]
-
-
-# from Baling to landfill
-Baling_Text_LF_y0 = cp.TransferDistribution(nr.triangular, [0.0384, 0.0644, 0.0904])
-Baling_Text_LF_y1 = cp.TransferDistribution(nr.triangular, [0.0384, 0.0644, 0.0904])
-Baling_Text_LF_y2 = cp.TransferDistribution(nr.triangular, [0.0384, 0.0644, 0.0904])
-Baling_Text_LF_y3 = cp.TransferDistribution(nr.triangular, [0.0384, 0.0644, 0.0904])
-Baling_Text_LF_y4 = cp.TransferDistribution(nr.triangular, [0.0384, 0.0644, 0.0904])
-Baling_Text_LF_y5 = cp.TransferDistribution(nr.triangular, [0.0482, 0.0644, 0.0806])
-Baling_Text_LF_y6 = cp.TransferDistribution(nr.triangular, [0.0482, 0.0644, 0.0806])
-Baling_Text_LF_y7 = cp.TransferDistribution(nr.triangular, [0.0482, 0.0644, 0.0806])
-Baling_Text_LF_y8 = cp.TransferDistribution(nr.triangular, [0.0482, 0.0644, 0.0806])
-Baling_Text_LF_y9 = cp.TransferDistribution(nr.triangular, [0.0482, 0.0644, 0.0806])
-Baling_Text_LF_y10 = cp.TransferDistribution(nr.triangular, [0.0497, 0.0644, 0.0791])
-Baling_Text_LF_y11 = cp.TransferDistribution(nr.triangular, [0.0483, 0.0625, 0.0768])
-Baling_Text_LF_y12 = cp.TransferDistribution(nr.triangular, [0.0468, 0.0607, 0.0745])
-Baling_Text_LF_y13 = cp.TransferDistribution(nr.triangular, [0.0468, 0.0607, 0.0745])
-Baling_Text_LF_y14 = cp.TransferDistribution(nr.triangular, [0.0468, 0.0607, 0.0745])
-Baling_Text_LF_y15 = cp.TransferDistribution(nr.triangular, [0.0482, 0.0624, 0.0766])
-Baling_Text_LF_y16 = cp.TransferDistribution(nr.triangular, [0.0495, 0.0642, 0.0788])
-Baling_Text_LF_y17 = cp.TransferDistribution(nr.triangular, [0.0481, 0.0642, 0.0803])
-Baling_Text_LF_y18 = cp.TransferDistribution(nr.triangular, [0.0481, 0.0642, 0.0803])
-Baling_Text_LF_y19 = cp.TransferDistribution(nr.triangular, [0.0481, 0.0642, 0.0803])
-Baling_Text_LF_y20 = cp.TransferDistribution(nr.triangular, [0.0481, 0.0642, 0.0803])
-
-
-# from baling to WIP
-Baling_Text_WIP_y0 = cp.TransferDistribution(nr.triangular, [0.0033, 0.0056, 0.0079])
-Baling_Text_WIP_y1 = cp.TransferDistribution(nr.triangular, [0.0033, 0.0056, 0.0079])
-Baling_Text_WIP_y2 = cp.TransferDistribution(nr.triangular, [0.0033, 0.0056, 0.0079])
-Baling_Text_WIP_y3 = cp.TransferDistribution(nr.triangular, [0.0033, 0.0056, 0.0079])
-Baling_Text_WIP_y4 = cp.TransferDistribution(nr.triangular, [0.0033, 0.0056, 0.0079])
-Baling_Text_WIP_y5 = cp.TransferDistribution(nr.triangular, [0.0042, 0.0056, 0.0070])
-Baling_Text_WIP_y6 = cp.TransferDistribution(nr.triangular, [0.0042, 0.0056, 0.0070])
-Baling_Text_WIP_y7 = cp.TransferDistribution(nr.triangular, [0.0042, 0.0056, 0.0070])
-Baling_Text_WIP_y8 = cp.TransferDistribution(nr.triangular, [0.0042, 0.0056, 0.0070])
-Baling_Text_WIP_y9 = cp.TransferDistribution(nr.triangular, [0.0042, 0.0056, 0.0070])
-Baling_Text_WIP_y10 = cp.TransferDistribution(nr.triangular, [0.0043, 0.0056, 0.0069])
-Baling_Text_WIP_y11 = cp.TransferDistribution(nr.triangular, [0.0058, 0.0075, 0.0092])
-Baling_Text_WIP_y12 = cp.TransferDistribution(nr.triangular, [0.0072, 0.0093, 0.0115])
-Baling_Text_WIP_y13 = cp.TransferDistribution(nr.triangular, [0.0072, 0.0093, 0.0115])
-Baling_Text_WIP_y14 = cp.TransferDistribution(nr.triangular, [0.0072, 0.0093, 0.0115])
-Baling_Text_WIP_y15 = cp.TransferDistribution(nr.triangular, [0.0059, 0.0076, 0.0093])
-Baling_Text_WIP_y16 = cp.TransferDistribution(nr.triangular, [0.0045, 0.0058, 0.0072])
-Baling_Text_WIP_y17 = cp.TransferDistribution(nr.triangular, [0.0044, 0.0058, 0.0073])
-Baling_Text_WIP_y18 = cp.TransferDistribution(nr.triangular, [0.0044, 0.0058, 0.0073])
-Baling_Text_WIP_y19 = cp.TransferDistribution(nr.triangular, [0.0044, 0.0058, 0.0073])
-Baling_Text_WIP_y20 = cp.TransferDistribution(nr.triangular, [0.0044, 0.0058, 0.0073])
-
-Baling_Text.transfers =[cp.TimeDependendDistributionTransfer([Baling_Text_LF_y0,
-                                                              Baling_Text_LF_y1,Baling_Text_LF_y2,Baling_Text_LF_y3,Baling_Text_LF_y4,Baling_Text_LF_y5,
-                                                              Baling_Text_LF_y6,Baling_Text_LF_y7,Baling_Text_LF_y8,Baling_Text_LF_y9,Baling_Text_LF_y10,
-                                                              Baling_Text_LF_y11,Baling_Text_LF_y12,Baling_Text_LF_y13,Baling_Text_LF_y14,Baling_Text_LF_y15,
-                                                              Baling_Text_LF_y16,Baling_Text_LF_y17,Baling_Text_LF_y18,Baling_Text_LF_y19,Baling_Text_LF_y20],
-                                                             BaliText_Landfill_P, Baling_Text, priority=2),
-                             cp.TimeDependendDistributionTransfer([Baling_Text_WIP_y0,
-                                                                   Baling_Text_WIP_y1,Baling_Text_WIP_y2,Baling_Text_WIP_y3,Baling_Text_WIP_y4,Baling_Text_WIP_y5,
-                                                                   Baling_Text_WIP_y6,Baling_Text_WIP_y7,Baling_Text_WIP_y8,Baling_Text_WIP_y9,Baling_Text_WIP_y10,
-                                                                   Baling_Text_WIP_y11,Baling_Text_WIP_y12,Baling_Text_WIP_y13,Baling_Text_WIP_y14,Baling_Text_WIP_y15,
-                                                                   Baling_Text_WIP_y16,Baling_Text_WIP_y17,Baling_Text_WIP_y18,Baling_Text_WIP_y19,Baling_Text_WIP_y20],
-                                                                  RPWIP_P, Baling_Text, priority=2),
-                            cp.ConstTransfer(1, BaliText_Reuse_P,  priority=1)]
-                            
-
-# Release form
-Air_Text.transfers=[cp.StochasticTransfer(tf.TriangTrunc, [0.2, 1.47, 1, 0, 1], Air_NM, priority=2),
-                    cp.ConstTransfer(1, RPAir_M, priority=1)]
-WW_Text.transfers=[cp.StochasticTransfer(nr.triangular,[0.2942, 0.46, 0.6258], RPWW_N, priority=2),
-                   cp.ConstTransfer(1, RPWW_M, priority=1)]
-
-
-# In[61]:
-
-
-'''Reprocess_Metal_P'''  
-# from shredding metals to air
-Reprocess_Metal_P.transfers =[cp.StochasticTransfer(tf.TriangTrunc, [0.0002, 1.07, 1, 0, 1], Air_Metal,  priority=2),
-                              cp.ConstTransfer(1, Melting_Metal, priority=1)]
-
-Melting_Metal.transfers=[cp.StochasticTransfer(nr.uniform, [0, 1], Purification_Metal_T, priority=2),
-                         cp.ConstTransfer(1, Purification_Metal_P, priority=1)]  
-
-# from purification to Moulding and finally to Reuse
-# we assumed the TCs from purification to moulding is between 0.0001 to 0.01, 
-#and thus consider 0.0001 as min and 0.01 as max to draw a trapezoidal distribution
-#3.05445180 is the calculated spread
-
-Purification_Metal_P.transfers =[cp.StochasticTransfer(tf.TrapezTrunc, [0.0001, 0.01, 3.05, 3.05, 1, 0, 1], PuriMetal_Reuse_P,  priority=2), # since Tc from moulding to reuse is 1, here we skip moulding to reuse to simplify the code
-                                cp.ConstTransfer(1, Puri_slag_P, priority=1)]
-Purification_Metal_T.transfers =[cp.StochasticTransfer(tf.TrapezTrunc, [0.0001, 0.01, 3.05, 3.05, 1, 0, 1], PuriMetal_Reuse_T,  priority=2), # since Tc from moulding to reuse is 1, here we skip moulding to reuse to simplify the code
-                                 cp.ConstTransfer(1, Puri_slag_T, priority=1)]
-
-
-
-# from slags to landfill
-Puri_Metal_LF_y0 = cp.TransferDistribution(nr.triangular, [0.2791, 0.35, 0.4209])
-Puri_Metal_LF_y1 = cp.TransferDistribution(nr.triangular, [0.2894, 0.35, 0.4106])
-Puri_Metal_LF_y2 = cp.TransferDistribution(nr.triangular, [0.2791, 0.35, 0.4209])
-Puri_Metal_LF_y3 = cp.TransferDistribution(nr.triangular, [0.2791, 0.35, 0.4209])
-Puri_Metal_LF_y4 = cp.TransferDistribution(nr.triangular, [0.2791, 0.35, 0.4209])
-Puri_Metal_LF_y5 = cp.TransferDistribution(nr.triangular, [0.2791, 0.35, 0.4209])
-Puri_Metal_LF_y6 = cp.TransferDistribution(nr.triangular, [0.2791, 0.35, 0.4209])
-Puri_Metal_LF_y7 = cp.TransferDistribution(nr.triangular, [0.2186, 0.35, 0.4814])
-Puri_Metal_LF_y8 = cp.TransferDistribution(nr.triangular, [0.2186, 0.35, 0.4814])
-Puri_Metal_LF_y9 = cp.TransferDistribution(nr.triangular, [0.2186, 0.35, 0.4814])
-Puri_Metal_LF_y10 = cp.TransferDistribution(nr.triangular, [0.2186, 0.35, 0.4814])
-Puri_Metal_LF_y11 = cp.TransferDistribution(nr.triangular, [0.2186, 0.35, 0.4814])
-Puri_Metal_LF_y12 = cp.TransferDistribution(tf.TriangTrunc, [0.35, 1.03, 1, 0, 1])
-Puri_Metal_LF_y13 = cp.TransferDistribution(tf.TriangTrunc, [0.35, 1.03, 1, 0, 1])
-Puri_Metal_LF_y14 = cp.TransferDistribution(tf.TriangTrunc, [0.35, 1.03, 1, 0, 1])
-Puri_Metal_LF_y15 = cp.TransferDistribution(tf.TriangTrunc, [0.35, 1.03, 1, 0, 1])
-Puri_Metal_LF_y16 = cp.TransferDistribution(tf.TriangTrunc, [0.35, 1.03, 1, 0, 1])
-Puri_Metal_LF_y17 = cp.TransferDistribution(tf.TriangTrunc, [0.35, 1.03, 1, 0, 1])
-Puri_Metal_LF_y18 = cp.TransferDistribution(tf.TriangTrunc, [0.35, 1.03, 1, 0, 1])
-Puri_Metal_LF_y19 = cp.TransferDistribution(tf.TriangTrunc, [0.35, 1.03, 1, 0, 1])
-Puri_Metal_LF_y20 = cp.TransferDistribution(tf.TriangTrunc, [0.35, 1.03, 1, 0, 1])
-
-Puri_slag_T.transfers =[cp.TimeDependendDistributionTransfer([Puri_Metal_LF_y0,
-                                                              Puri_Metal_LF_y1,Puri_Metal_LF_y2,Puri_Metal_LF_y3,Puri_Metal_LF_y4,Puri_Metal_LF_y5,
-                                                              Puri_Metal_LF_y6,Puri_Metal_LF_y7,Puri_Metal_LF_y8,Puri_Metal_LF_y9,Puri_Metal_LF_y10,
-                                                              Puri_Metal_LF_y11,Puri_Metal_LF_y12,Puri_Metal_LF_y13,Puri_Metal_LF_y14,Puri_Metal_LF_y15,
-                                                              Puri_Metal_LF_y16,Puri_Metal_LF_y17,Puri_Metal_LF_y18,Puri_Metal_LF_y19,Puri_Metal_LF_y20],
-                                                             PuriSlag_Landfill_T, Puri_slag_T, priority=2),
-                      cp.ConstTransfer(1, PuriSlag_Reuse_T, priority=1)]
-Puri_slag_P.transfers =[cp.TimeDependendDistributionTransfer([Puri_Metal_LF_y0,
-                                                              Puri_Metal_LF_y1,Puri_Metal_LF_y2,Puri_Metal_LF_y3,Puri_Metal_LF_y4,Puri_Metal_LF_y5,
-                                                              Puri_Metal_LF_y6,Puri_Metal_LF_y7,Puri_Metal_LF_y8,Puri_Metal_LF_y9,Puri_Metal_LF_y10,
-                                                              Puri_Metal_LF_y11,Puri_Metal_LF_y12,Puri_Metal_LF_y13,Puri_Metal_LF_y14,Puri_Metal_LF_y15,
-                                                              Puri_Metal_LF_y16,Puri_Metal_LF_y17,Puri_Metal_LF_y18,Puri_Metal_LF_y19,Puri_Metal_LF_y20],
-                                                             PuriSlag_Landfill_P, Puri_slag_P, priority=2),
-                      cp.ConstTransfer(1, PuriSlag_Reuse_P, priority=1)]
-
-
-# release form
-Air_Metal.transfers=[cp.StochasticTransfer(tf.TriangTrunc, [0.2, 1.47, 1, 0, 1], Air_NM, priority=2),
-                    cp.ConstTransfer(1, RPAir_M, priority=1)]
-
-
-# In[62]:
-
-
-'''Reprocess_Glass_P'''
-# from crushing galss to air
-
-Reprocess_Glass_P.transfers =[cp.StochasticTransfer(tf.TrapezTrunc, [0.07, 0.47, 0.49, 0.49, 1, 0, 1], Air_Glass,  priority=2), # since Tc from moulding to reuse is 1, here we skip moulding to reuse to simplify the code
-                              cp.ConstTransfer(1, Melting_Glass, priority=1)]
-
-Melting_Glass.transfers=[cp.ConstTransfer(1, MeltGlass_Reuse_T, priority=1)]
-
-# Release form
-Air_Glass.transfers=[cp.StochasticTransfer(tf.TriangTrunc, [0.2, 1.47, 1, 0, 1], Air_NM,priority=2),
-                     cp.ConstTransfer(1, RPAir_M, priority=1)]  
 
 
 # In[63]:
