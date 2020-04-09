@@ -20,7 +20,7 @@ import TruncatingFunctions as tf
 # In[5]:
 
 
-model = Model.Model('nano-TiO2 AUT from 2000 to 2020')
+model = Model.Model('nano-TiO2 anatase from 2000 to 2020')
 
 
 # In[6]:
@@ -57,11 +57,11 @@ Manuf_Plas = cp.FlowCompartment('Manuf Plastics', logInflows=True, logOutflows=T
 Manuf_Solids = cp.FlowCompartment('Manuf Solids', logInflows=True, logOutflows=True, categories=['Manufacture'])
 Manuf_Liquids = cp.FlowCompartment('Manuf Liquids', logInflows=True, logOutflows=True, categories=['Manufacture'])
 
-manuf_textiles_waste = cp.FlowCompartment('Waste from manuf Textiles', logInflows=True, logOutflows=True, categories=['Manufacture', 'Solid Waste'])
-manuf_plastics_waste = cp.FlowCompartment('Waste from manuf Plastics', logInflows=True, logOutflows=True, categories=['Manufacture', 'Solid Waste'])
+#manuf_textiles_waste = cp.FlowCompartment('Waste from manuf Textiles', logInflows=True, logOutflows=True, categories=['Manufacture', 'Solid Waste'])
+#manuf_plastics_waste = cp.FlowCompartment('Waste from manuf Plastics', logInflows=True, logOutflows=True, categories=['Manufacture', 'Solid Waste'])
 
-ManufTextW_Reuse_P = cp.Sink('Product-embedded from Textile manufacturing to reprocessing and reuse', logInflows=True, categories=['Reprocessing', 'Reuse', 'Reuse_P'])
-ManufPlasW_Reuse_P = cp.Sink('Product-embedded from Plastic manufacturing to reprocessing and reuse', logInflows=True, categories=['Reprocessing', 'Reuse', 'Reuse_P'])
+#ManufTextW_Reuse_P = cp.Sink('Product-embedded from Textile manufacturing to reprocessing and reuse', logInflows=True, categories=['Reprocessing', 'Reuse', 'Reuse_P'])
+#ManufPlasW_Reuse_P = cp.Sink('Product-embedded from Plastic manufacturing to reprocessing and reuse', logInflows=True, categories=['Reprocessing', 'Reuse', 'Reuse_P'])
 ManufSolidW_Reuse_P = cp.Sink('Product-embedded from Other solids manufacturing to reprocessing and reuse', logInflows=True, categories=['Reprocessing', 'Reuse', 'Reuse_P'])
 
 
@@ -69,9 +69,9 @@ ManufSolidW_Reuse_P = cp.Sink('Product-embedded from Other solids manufacturing 
 
 
 # Definition of Products categories (compartments)
-PersCare = cp.FlowCompartment('PersCare', logInflows=True, logOutflows=True, categories=['Products'])
-PersCare_Use = cp.Stock('PersCare_Use', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','Use','PMCrel'])
-PersCare_EoL = cp.Stock('PersCare_EoL', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','EoL'])
+#PersCare = cp.FlowCompartment('PersCare', logInflows=True, logOutflows=True, categories=['Products'])
+#PersCare_Use = cp.Stock('PersCare_Use', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','Use','PMCrel'])
+#PersCare_EoL = cp.Stock('PersCare_EoL', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','EoL'])
 
 OutPaints = cp.FlowCompartment('OutPaints', logInflows=True, logOutflows=True, categories='Products')
 OutPaints_Use = cp.Stock('OutPaints_Use', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','Use','PMCrel'])
@@ -93,38 +93,38 @@ Ceramics = cp.FlowCompartment('Ceramics', logInflows=True, logOutflows=True, cat
 Ceramics_Use = cp.Stock('Ceramics_Use', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','Use','PMCrel'])
 Ceramics_EoL = cp.Stock('Ceramics_EoL', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','EoL'])
 
-RubPlas = cp.FlowCompartment('RubPlas', logInflows=True, logOutflows=True, categories='Products')
-RubPlas_Use = cp.Stock('RubPlas_Use', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','Use','PMCrel'])
-RubPlas_EoL = cp.Stock('RubPlas_EoL', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','EoL'])
+#RubPlas = cp.FlowCompartment('RubPlas', logInflows=True, logOutflows=True, categories='Products')
+#RubPlas_Use = cp.Stock('RubPlas_Use', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','Use','PMCrel'])
+#RubPlas_EoL = cp.Stock('RubPlas_EoL', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','EoL'])
 
 Solar = cp.FlowCompartment('Solar', logInflows=True, logOutflows=True, categories='Products')
 Solar_EoL = cp.Stock('Solar_EoL', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','EoL'])
 
-Electronics= cp.FlowCompartment('Electronics', logInflows=True, logOutflows=True, categories='Products')
-Electronics_Use = cp.Stock('Electronics_Use', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','Use','PMCrel'])
-Electronics_EoL = cp.Stock('Electronics_EoL', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','EoL'])
+#Electronics= cp.FlowCompartment('Electronics', logInflows=True, logOutflows=True, categories='Products')
+#Electronics_Use = cp.Stock('Electronics_Use', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','Use','PMCrel'])
+#Electronics_EoL = cp.Stock('Electronics_EoL', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','EoL'])
 
-CleanAgents= cp.FlowCompartment('CleanAgents', logInflows=True, logOutflows=True, categories='Products')
-CleanAgents_Use = cp.Stock('CleanAgents_Use', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','Use','PMCrel'])
-CleanAgents_EoL = cp.Stock('CleanAgents_EoL', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','EoL'])
+#CleanAgents= cp.FlowCompartment('CleanAgents', logInflows=True, logOutflows=True, categories='Products')
+#CleanAgents_Use = cp.Stock('CleanAgents_Use', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','Use','PMCrel'])
+#CleanAgents_EoL = cp.Stock('CleanAgents_EoL', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','EoL'])
 
-Food = cp.FlowCompartment('Food', logInflows=True, logOutflows=True, categories='Products')
-Food_Use = cp.Stock('Food_Use', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','Use','PMCrel'])
-Food_EoL = cp.Stock('Food_EoL', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','EoL'])
+#Food = cp.FlowCompartment('Food', logInflows=True, logOutflows=True, categories='Products')
+#Food_Use = cp.Stock('Food_Use', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','Use','PMCrel'])
+#Food_EoL = cp.Stock('Food_EoL', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','EoL'])
 
-Textiles = cp.FlowCompartment('Textiles', logInflows=True, logOutflows=True, categories='Products')
-Textiles_Use = cp.Stock('Textiles_Use', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','Use','PMCrel'])
-Textiles_EoL = cp.Stock('Textiles_EoL', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','EoL'])
+#Textiles = cp.FlowCompartment('Textiles', logInflows=True, logOutflows=True, categories='Products')
+#Textiles_Use = cp.Stock('Textiles_Use', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','Use','PMCrel'])
+#Textiles_EoL = cp.Stock('Textiles_EoL', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','EoL'])
 
 
 # In[11]:
 
 
 # Definition of forms of release after use
-PersCare_WW = cp.FlowCompartment('From PersCare to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater'])
-PersCare_WW_N = cp.FlowCompartment('Pristine in Wastewater from PersCare', logInflows=True, logOutflows=True, categories=['Wastewater_N', 'Pristine'])
-PersCare_SW = cp.FlowCompartment('From PersCare to Surfacewater', logInflows=True, logOutflows=True, categories=['Surfacewater'])
-PersCare_SW_N = cp.Sink('Pristine in Surfacewater from PersCare', logInflows=True, categories=['Surfacewater_N', 'Pristine'])
+#PersCare_WW = cp.FlowCompartment('From PersCare to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater'])
+#PersCare_WW_N = cp.FlowCompartment('Pristine in Wastewater from PersCare', logInflows=True, logOutflows=True, categories=['Wastewater_N', 'Pristine'])
+#PersCare_SW = cp.FlowCompartment('From PersCare to Surfacewater', logInflows=True, logOutflows=True, categories=['Surfacewater'])
+#PersCare_SW_N = cp.Sink('Pristine in Surfacewater from PersCare', logInflows=True, categories=['Surfacewater_N', 'Pristine'])
 
 OutPaints_Air = cp.FlowCompartment('From OutPaints to Air', logInflows=True, logOutflows=True, categories=['Air'])
 OutPaints_Air_N = cp.Sink('Pristine in Air from OutPaints', logInflows=True, categories=['Air_N', 'Pristine'])
@@ -170,29 +170,29 @@ Ceramics_NUsoil = cp.FlowCompartment('From Ceramics coating to Soil', logInflows
 Ceramics_NUsoil_N = cp.Sink('Pristine from Ceramics coating to NU Soil', logInflows=True, categories=['Soil_N', 'NU Soil_N', 'Pristine'])
 Ceramics_NUsoil_M = cp.Sink('Matrix-embedded from Ceramics coating to NU Soil', logInflows=True, categories=['Soil_M', 'NU Soil_M', 'Matrix-embedded'])
 
-RubPlas_Air = cp.FlowCompartment('From RubPlas to Air', logInflows=True, logOutflows=True, categories=['Air'])
-RubPlas_Air_N = cp.Sink('Pristine from RubPlas to Air', logInflows=True, categories=['Air_N', 'Pristine'])
-RubPlas_Air_M = cp.Sink('Matrix-embedded from RubPlas to Air', logInflows=True, categories=['Air_M', 'Matrix-embedded'])
-RubPlas_WW = cp.FlowCompartment('From RubPlas to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater'])
-RubPlas_WW_N = cp.FlowCompartment('Pristine from RubPlas to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater_N', 'Pristine'])
-RubPlas_WW_M = cp.FlowCompartment('Matrix-embedded from RubPlas to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater_M', 'Matrix-embedded'])
+#RubPlas_Air = cp.FlowCompartment('From RubPlas to Air', logInflows=True, logOutflows=True, categories=['Air'])
+#RubPlas_Air_N = cp.Sink('Pristine from RubPlas to Air', logInflows=True, categories=['Air_N', 'Pristine'])
+#RubPlas_Air_M = cp.Sink('Matrix-embedded from RubPlas to Air', logInflows=True, categories=['Air_M', 'Matrix-embedded'])
+#RubPlas_WW = cp.FlowCompartment('From RubPlas to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater'])
+#RubPlas_WW_N = cp.FlowCompartment('Pristine from RubPlas to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater_N', 'Pristine'])
+#RubPlas_WW_M = cp.FlowCompartment('Matrix-embedded from RubPlas to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater_M', 'Matrix-embedded'])
 
-Electronics_WW = cp.FlowCompartment('From Electronics to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater'])
-Electronics_WW_N = cp.FlowCompartment('Pristine from Electronics to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater_N', 'Pristine'])
-Electronics_WW_M = cp.FlowCompartment('Matrix-embedded from Electronics to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater_M', 'Matrix-embedded'])
+#Electronics_WW = cp.FlowCompartment('From Electronics to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater'])
+#Electronics_WW_N = cp.FlowCompartment('Pristine from Electronics to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater_N', 'Pristine'])
+#Electronics_WW_M = cp.FlowCompartment('Matrix-embedded from Electronics to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater_M', 'Matrix-embedded'])
 
-CleanAgents_WW = cp.FlowCompartment('From Cleaning agents to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater'])
-CleanAgents_WW_N = cp.FlowCompartment('Pristine from Cleaning agents to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater_N', 'Pristine'])
+#CleanAgents_WW = cp.FlowCompartment('From Cleaning agents to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater'])
+#CleanAgents_WW_N = cp.FlowCompartment('Pristine from Cleaning agents to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater_N', 'Pristine'])
 
-Food_WW = cp.FlowCompartment('From Food to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater'])
-Food_WW_N = cp.FlowCompartment('Pristine from Food to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater_N', 'Pristine'])
+#Food_WW = cp.FlowCompartment('From Food to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater'])
+#Food_WW_N = cp.FlowCompartment('Pristine from Food to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater_N', 'Pristine'])
 
-Textiles_Air = cp.FlowCompartment('From Textiles to Air', logInflows=True, logOutflows=True, categories=['Air'])
-Textiles_Air_N = cp.Sink('Pristine from Textiles to Air', logInflows=True, categories=['Air_N', 'Pristine'])
-Textiles_Air_M = cp.Sink('Matrix-embedded from Textiles to Air', logInflows=True, categories=['Air_M', 'Matrix-embedded'])
-Textiles_WW = cp.FlowCompartment('From Textiles to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater'])
-Textiles_WW_N = cp.FlowCompartment('Pristine from Textiles to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater_N', 'Pristine'])
-Textiles_WW_M = cp.FlowCompartment('Matrix-embedded from Textiles to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater_M', 'Matrix-embedded'])
+#Textiles_Air = cp.FlowCompartment('From Textiles to Air', logInflows=True, logOutflows=True, categories=['Air'])
+#Textiles_Air_N = cp.Sink('Pristine from Textiles to Air', logInflows=True, categories=['Air_N', 'Pristine'])
+#Textiles_Air_M = cp.Sink('Matrix-embedded from Textiles to Air', logInflows=True, categories=['Air_M', 'Matrix-embedded'])
+#Textiles_WW = cp.FlowCompartment('From Textiles to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater'])
+#Textiles_WW_N = cp.FlowCompartment('Pristine from Textiles to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater_N', 'Pristine'])
+#Textiles_WW_M = cp.FlowCompartment('Matrix-embedded from Textiles to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater_M', 'Matrix-embedded'])
 
 
 # In[12]:
@@ -470,24 +470,19 @@ compartmentList=[totalInflow, Import_Manuf, Import_Cons,
                  Production, 
                  Prod_Air_N, Manuf_Air_N, 
                  Manufacture, 
-                 Manuf_Plas, Manuf_Text, Manuf_Solids, Manuf_Liquids,
+                 Manuf_Solids, Manuf_Liquids,
                  manuf_textiles_waste, manuf_plastics_waste, 
                  ManufSolidW_Reuse_P, ManufTextW_Reuse_P, ManufPlasW_Reuse_P,
                  Consumption,
-                 PersCare, PersCare_Use, PersCare_EoL,
                  OutPaints, OutPaints_Use, OutPaints_EoL,
                  InPaints, InPaints_Use, InPaints_EoL,
                  Cement, Cement_Use, Cement_EoL,
                  Glass, Glass_Use, Glass_EoL,
                  Ceramics, Ceramics_Use, Ceramics_EoL,
-                 RubPlas, RubPlas_Use, RubPlas_EoL,
                  Solar, Solar_EoL,
-                 Electronics, Electronics_Use, Electronics_EoL,
-                 CleanAgents, CleanAgents_Use, CleanAgents_EoL,
-                 Food, Food_Use, Food_EoL,
-                 Textiles, Textiles_Use, Textiles_EoL,
+
                  
-                 PersCare_WW, PersCare_WW_N, PersCare_SW, PersCare_SW_N,
+
                  OutPaints_Air, OutPaints_Air_N, OutPaints_Air_M, OutPaints_WW, OutPaints_WW_N, OutPaints_WW_M, 
                  OutPaints_NUsoil, OutPaints_NUsoil_N, OutPaints_NUsoil_M,
                  InPaints_Air, InPaints_Air_N, InPaints_Air_M, InPaints_WW, InPaints_WW_N, InPaints_WW_M, 
@@ -497,11 +492,7 @@ compartmentList=[totalInflow, Import_Manuf, Import_Cons,
                  Glass_NUsoil, Glass_NUsoil_N, Glass_NUsoil_M,
                  Ceramics_WW, Ceramics_WW_N, Ceramics_WW_M, Ceramics_Air, Ceramics_Air_N, Ceramics_Air_M, 
                  Ceramics_NUsoil, Ceramics_NUsoil_N, Ceramics_NUsoil_M,
-                 RubPlas_Air, RubPlas_Air_N, RubPlas_Air_M, RubPlas_WW, RubPlas_WW_N, RubPlas_WW_M,
-                 Electronics_WW, Electronics_WW_N, Electronics_WW_M,
-                 CleanAgents_WW, CleanAgents_WW_N,
-                 Food_WW, Food_WW_N,
-                 Textiles_WW, Textiles_WW_N, Textiles_WW_M, Textiles_Air, Textiles_Air_N, Textiles_Air_M,
+
                  
                  WW_N, WW_M, WW_T,
                  OnSiteTreat_N, OnSiteTreat_M, OnSiteTreat_T,
@@ -578,33 +569,24 @@ Productiondata.shape
 # Production for the whole Europe:
 Productiondata_EU = Productiondata.values #in earlier code as " Productiondata = Productiondata.as_matrix(Productiondata)
 # Scaling production for the UK only:
-Productiondata_AUT = Productiondata_EU*0
+Productiondata_anatase = Productiondata_EU*0.238   #nano-anatase fraction 
 # Putting the numbers in the model:
 Productionvolume_EU = []
-Productionvolume_AUT = []
-for i in np.arange(0,31):
+Productionvolume_anatase = []
+for i in np.arange(0,21):
     Productionvolume_EU.append(Productiondata_EU[:,i])
-    Productionvolume_AUT.append(Productiondata_AUT[:,i])
+    Productionvolume_anatase.append(Productiondata_anatase[:,i])
 #model.addInflow(cp.ExternalListInflow(totalInflow, inflowList=Productionvolume))   
-periodRange = np.arange(0,31)
+periodRange = np.arange(0,21)
 
 # Setting inflow to production
-model.addInflow(cp.ExternalListInflow(totalInflow, [cp.RandomChoiceInflow(Productionvolume_AUT[x]) for x in periodRange]))
-
-# Adding imports. (country-specific)
-SF_Prod = 0
-SF_Manuf = nr.triangular(0.0146*(1-0.22), 0.0146, 0.0146*(1+0.22), 10000)
-SF_Cons = nr.triangular(0.0165*(1-0.34), 0.0165, 0.0165*(1+0.34), 10000)
-model.addInflow(cp.ExternalListInflow(Import_Manuf, [cp.RandomChoiceInflow(Productionvolume_EU[x]*(SF_Manuf-SF_Prod)) for x in periodRange]))
-model.addInflow(cp.ExternalListInflow(Import_Cons, [cp.RandomChoiceInflow(Productionvolume_EU[x]*(SF_Cons-SF_Manuf)) for x in periodRange]))
+model.addInflow(cp.ExternalListInflow(totalInflow, [cp.RandomChoiceInflow(Productionvolume_anatase[x]) for x in periodRange]))
 
 
 # In[22]:
 
 
 totalInflow.transfers = [cp.ConstTransfer(1, Production)]
-Import_Manuf.transfers = [cp.ConstTransfer(1, Manufacture)]
-Import_Cons.transfers = [cp.ConstTransfer(1, Consumption)]
 
 
 # In[23]:
@@ -625,18 +607,9 @@ Tot_Manuf_Liquids = nr.triangular(0.72, 0.76, 0.81, 10000) + nr.triangular(0, 0.
 + nr.triangular(0, 0.0083, 0.02, 10000) + nr.triangular(0, 0.0483, 0.14, 10000)
 
 Manufacture.transfers = [cp.StochasticTransfer(nr.triangular, [0, 0.0233, 0.05], Manuf_Plas, priority=2),
-                        cp.StochasticTransfer(nr.triangular, [0, 0.0017, 0.01], Manuf_Text, priority=2),
                         cp.RandomChoiceTransfer(Tot_Manuf_Solids, Manuf_Solids, priority=2),
                         cp.RandomChoiceTransfer(Tot_Manuf_Liquids, Manuf_Liquids, priority=2)]
 
-Manuf_Text.transfers = [cp.StochasticTransfer(nr.triangular, [0.00000085, 0.0000017, 0.00000255], Manuf_Air_N, priority=2),
-                           cp.StochasticTransfer(nr.uniform, [0.001, 0.0016], WW_N, priority=2),
-                           cp.StochasticTransfer(nr.uniform, [0, 0.018], manuf_textiles_waste, priority=2),
-                           cp.ConstTransfer(1, Consumption, priority=1)]
-Manuf_Plas.transfers = [cp.StochasticTransfer(nr.triangular, [0.00000085, 0.0000017, 0.00000255], Manuf_Air_N, priority=2),
-                           cp.StochasticTransfer(nr.uniform, [0.001, 0.0016], WW_N, priority=2),
-                           cp.StochasticTransfer(nr.uniform, [0.03, 0.08], manuf_plastics_waste, priority=2),
-                           cp.ConstTransfer(1, Consumption, priority=1)]
 Manuf_Solids.transfers = [cp.StochasticTransfer(nr.triangular, [0.00000085, 0.0000017, 0.00000255], Manuf_Air_N, priority=2),
                            cp.StochasticTransfer(nr.uniform, [0.001, 0.0016], WW_N, priority=2),
                            cp.StochasticTransfer(nr.triangular, [0.005, 0.01, 0.015], ManufSolidW_Reuse_P, priority=2),
@@ -645,30 +618,17 @@ Manuf_Liquids.transfers = [cp.StochasticTransfer(nr.triangular, [0.00000085, 0.0
                            cp.StochasticTransfer(nr.uniform, [0.001, 0.0016], WW_N, priority=2),
                            cp.ConstTransfer(1, Consumption, priority=1)]
 
-manuf_textiles_waste.transfers = [cp.StochasticTransfer(nr.triangular, [0.25, 0.5, 0.75], ManufTextW_Reuse_P),
-                                 cp.StochasticTransfer(nr.triangular, [0.3*0.25, 0.3*0.5, 0.3*0.75], WIP_P),
-                                 cp.StochasticTransfer(nr.triangular, [0.7*0.25, 0.7*0.5, 0.7*0.75], ManufTextW_Landfill_P)]
-manuf_plastics_waste.transfers = [cp.RandomChoiceTransfer(tf.TriangTruncDet(0.455, 0.91, 1.365, 10000, 0, 1), ManufPlasW_Reuse_P),
-                                 cp.StochasticTransfer(nr.triangular, [0.045, 0.09, 0.135], WIP_P),
-                                 cp.StochasticTransfer(nr.triangular, [0.001, 0.002, 0.003], ManufPlasW_Landfill_P)]
-
 
 # In[24]:
 
 
 # ENM allocation to product categories
-Consumption.transfers = [cp.StochasticTransfer(nr.triangular, [0.72, 0.76, 0.81], PersCare),
-                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0508, 0.10], OutPaints),
+Consumption.transfers = [cp.StochasticTransfer(nr.triangular, [0.00, 0.0508, 0.10], OutPaints),
                          cp.StochasticTransfer(nr.triangular, [0.00, 0.0508, 0.10], InPaints),
                          cp.StochasticTransfer(nr.triangular, [0.00, 0.0286, 0.05], Cement),
                          cp.StochasticTransfer(nr.triangular, [0.00, 0.0286, 0.05], Glass),
                          cp.StochasticTransfer(nr.triangular, [0.00, 0.0286, 0.05], Ceramics),
-                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0233, 0.05], RubPlas),
-                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0033, 0.01], Solar),
-                         cp.StochasticTransfer(nr.triangular, [0.01, 0.0183, 0.03], Electronics),
-                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0083, 0.02], CleanAgents),
-                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0483, 0.14], Food),
-                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0017, 0.01], Textiles)]
+                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0033, 0.01], Solar)]
 
 
 # In[25]:
@@ -679,11 +639,6 @@ Consumption.transfers = [cp.StochasticTransfer(nr.triangular, [0.72, 0.76, 0.81]
 #For pigment TiO2
 #PersCare.transfers = [cp.ConstTransfer(1, PersCare_Use, priority=1),
 #                      cp.StochasticTransfer(nr.triangular, [0.069, 0.11, 0.151], PersCare_EoL, priority=2)] 
-
-
-#For nano-TiO2 composites
-PersCare.transfers = [cp.ConstTransfer(1, PersCare_Use, priority=1),
-                      cp.StochasticTransfer(nr.triangular, [0.095, 0.15, 0.206], PersCare_EoL, priority=2)] #Updated based on Keller et al. (2014)
 
 OutPaints.transfers = [cp.ConstTransfer(1, OutPaints_EoL, priority=1),
                     cp.StochasticTransfer(nr.triangular, [0.005, 0.01, 0.015], OutPaints_Use, priority=2)]
@@ -700,52 +655,7 @@ Glass.transfers = [cp.ConstTransfer(1, Glass_EoL, priority=1),
 Ceramics.transfers = [cp.ConstTransfer(1, Ceramics_EoL, priority=1),
                       cp.StochasticTransfer(nr.triangular, [0.175, 0.35, 0.525], Ceramics_Use, priority=2)] 
 
-RubPlas.transfers = [cp.ConstTransfer(1, RubPlas_EoL, priority=1),
-                     cp.StochasticTransfer(nr.triangular, [0.015, 0.035, 0.045], RubPlas_Use, priority=2)]
-
 Solar.transfers = [cp.ConstTransfer(1, Solar_EoL, priority=1)]
-
-Electronics.transfers = [cp.ConstTransfer(1, Electronics_EoL, priority=1),
-                         cp.StochasticTransfer(nr.triangular, [0.15, 0.30, 0.45], Electronics_Use, priority=2)] 
-                       
-CleanAgents.transfers = [cp.ConstTransfer(1, CleanAgents_Use, priority=1),
-                         cp.StochasticTransfer(nr.triangular, [0.025, 0.05, 0.075], CleanAgents_EoL, priority=2)] 
-                       
-Food.transfers = [cp.ConstTransfer(1, Food_Use, priority=1),
-                  cp.StochasticTransfer(nr.triangular, [0.05, 0.10, 0.15], Food_EoL, priority=2)] 
-# Determination of releases during use: 
-# previous from Sun et al = 0.03 (0.015 the first year), 
-# new from LEITAT = 0.093 after ten washings (i.e. assumed during the first year), 
-# so in total (wastewater + air) = 0.186 released during use.
-Textiles_Use_data = np.concatenate([nr.triangular(0.015, 0.03, 0.045, 5000), nr.triangular(0.093, 0.186, 0.279, 5000)])
-Textiles.transfers = [cp.ConstTransfer(1, Textiles_EoL, priority=1),
-                      cp.RandomChoiceTransfer(Textiles_Use_data, Textiles_Use, priority=2)] 
-
-
-# In[26]:
-
-
-# Personal care
-PersCare_Use.localRelease = cp.ListRelease([0.90,0.10])
-
-PersCare_EoL.localRelease = cp.ListRelease([0.90,0.10]) 
-
-# For pigment-TiO2
-#PersCare_Use.transfers = [cp.ConstTransfer(1, PersCare_WW, priority=1)],
-#
-#PersCare_WW.transfers = [cp.ConstTransfer(1, PersCare_WW_N, priority=1)]
-#
-#PersCare_EoL.transfers = [cp.ConstTransfer(1, PackW, priority=1)]
-
-# For nano-TiO2 composites
-PersCare_Use.transfers = [cp.ConstTransfer(1, PersCare_WW, priority=1),
-                          cp.StochasticTransfer(nr.triangular, [0.025,0.04,0.055], PersCare_SW, priority=2)]
-
-PersCare_WW.transfers = [cp.ConstTransfer(1, PersCare_WW_N, priority=1)]
-
-PersCare_SW.transfers = [cp.ConstTransfer(1, PersCare_SW_N, priority=1)]
-
-PersCare_EoL.transfers = [cp.ConstTransfer(1, PackW, priority=1)]
 
 
 # In[27]:
@@ -908,59 +818,6 @@ Ceramics_NUsoil.transfers = [cp.StochasticTransfer(nr.triangular, [0.1, 0.3, 0.5
 Ceramics_EoL.transfers = [cp.ConstTransfer(1, CDW, priority=1)]
 
 
-# In[31]:
-
-
-# Rubber, ceramic and plastic additives
-
-#Plastics_Use.localRelease = cp.FixedRateRelease(0.125)
-#Sport_Use.localRelease = cp.FixedRateRelease(0.1428571)
-#Mean = 0.134, so:
-
-RubPlas_Use.localRelease = cp.FixedRateRelease(0.134)
-
-
-#Plastics_EoL.localRelease = cp.ListRelease([0, 0, 0.003466974, 0.01439745, 0.04894278,
-#                                            0.1172529, 0.1980285, 0.2358228, 0.1980285, 0.1172529,
-#                                            0.04894278,0.01439745,0.003466974]) 
-#Sport_EoL.localRelease = cp.ListRelease([0, 0, 0, 0.006209665, 0.06059754,
-#                                         0.2417303, 0.3829249, 0.2417303, 0.06059754, 0.006209665]) 
-#Mean = [0, 0, 0.001733487, 0.0103035575, 0.05477016,
-#          0.1794916, 0.2904767, 0.23877655, 0.12931302, 0.0617312825,
-#          0.02447139, 0.007198725, 0.001733487], 
-#adds to 1, so:
-
-RubPlas_EoL.localRelease = cp.ListRelease([0, 0, 0.001733487, 0.0103035575, 0.05477016,
-                                           0.1794916, 0.2904767, 0.23877655, 0.12931302, 0.0617312825,
-                                           0.02447139, 0.007198725, 0.001733487])
-
-RubPlas_Use.transfers = [cp.StochasticTransfer(nr.triangular, [0.075, 0.15, 0.225], RubPlas_Air, priority=1),
-                        cp.StochasticTransfer(tf.TriangTruncDet, [0.425, 0.85, 1.275, 1, 0, 1], RubPlas_WW, priority=1)]
-
-RubPlas_Air.transfers = [cp.StochasticTransfer(nr.uniform, [1e-6, 1], RubPlas_Air_N, priority=1),
-                        cp.StochasticTransfer(nr.uniform, [1e-6, 1], RubPlas_Air_M, priority=1)]
-
-TransfSportWWN = nr.uniform(1e-6, 1, 10000)
-TransfPlasWWN = nr.triangular(0.15, 0.30, 0.45, 10000)
-TransfRubPlasWWN = (TransfSportWWN + TransfPlasWWN)/2
-
-TransfSportWWM = nr.uniform(1e-6, 1, 10000)
-TransfPlasWWM = tf.TriangTruncDet(0.35, 0.70, 1.05, 10000, 0, 1)
-TransfRubPlasWWM = (TransfSportWWM + TransfPlasWWM)/2
-
-RubPlas_WW.transfers = [cp.TimeDependendListTransfer([nr.choice(TransfRubPlasWWN),
-                                                      nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN),
-                                                      nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN),
-                                                      nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN),
-                                                      nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN),
-                                                      nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN),
-                                                      nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN), nr.choice(TransfRubPlasWWN)],
-                                                     RubPlas_WW_N, RubPlas_WW, priority=2),
-                       cp.ConstTransfer(1, RubPlas_WW_M, priority=1)]
-
-
-RubPlas_EoL.transfers = [cp.ConstTransfer(1, MMSW, priority=1)]
-
 
 # In[32]:
 
@@ -969,7 +826,7 @@ RubPlas_EoL.transfers = [cp.ConstTransfer(1, MMSW, priority=1)]
 # IRENA, 2016, End-of-life management - Solar Photovoltaic Panels Report: Average lifetime of a solar panel is 30 years.
 # Since our model covers only 20 years and we assume no TiO2 was included in solar panels before 2000, we don't need to 
 # look at what happens to waste, since the nano will still be in stock in 2020/2030.
-# So I assume everything goes to waste at 31 years, and everything is reprocessed, only to give the model transfers.
+# So I assume everything goes to waste at 21 years, and everything is reprocessed, only to give the model transfers.
 Solar_EoL.localRelease = cp.ListRelease([0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                                          0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                                          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])
@@ -978,77 +835,6 @@ Solar_EoL.transfers = [cp.ConstTransfer(1, SolarWaste, priority=1)]
 
 # To change if the model goes further than 2030.
 SolarWaste.transfers = [cp.ConstTransfer(1, Reprocess_Solar_P, priority=1)]
-
-
-# In[33]:
-
-
-# Electronics                        
-Electronics_Use.localRelease = cp.FixedRateRelease(0.125)
-
-Electronics_EoL.localRelease = cp.ListRelease([0.002457901,0.004936706,0.01218547,0.02617355,0.04892212,
-                                               0.07957497,0.112637,0.1387466,0.1487314,0.1387466,
-                                               0.112637,0.07957497,0.04892212,0.02617355,0.01218547,
-                                               0.004936706,0.002457901]) 
-
-Electronics_Use.transfers = [cp.ConstTransfer(1, Electronics_WW, priority=1)]
-
-Electronics_WW.transfers = [cp.StochasticTransfer(tf.TriangTruncDet, [0.475, 0.95, 1.425, 1, 0, 1], Electronics_WW_N, priority=1),
-                           cp.StochasticTransfer(nr.triangular, [0.025, 0.05, 0.075], Electronics_WW_M, priority=1)]
-
-Electronics_EoL.transfers = [cp.ConstTransfer(1, WEEE, priority=1), 
-                             cp.StochasticTransfer(nr.triangular, [0.085, 0.17, 0.255], MMSW, priority=2)]
-
-
-# In[34]:
-
-
-# Cleaning Agents
-CleanAgents_Use.localRelease = cp.ListRelease([1.0])
-
-CleanAgents_EoL.localRelease = cp.ListRelease([1.0]) 
-
-CleanAgents_Use.transfers = [cp.ConstTransfer(1, CleanAgents_WW, priority=1)]
-
-CleanAgents_WW.transfers = [cp.ConstTransfer(1, CleanAgents_WW_N, priority=1)]
-
-CleanAgents_EoL.transfers = [cp.ConstTransfer(1, PackW, priority=1)]
-
-
-# In[35]:
-
-
-# Food
-Food_Use.localRelease = cp.ListRelease([1.0])
-
-Food_EoL.localRelease = cp.ListRelease([1.0]) 
-
-Food_Use.transfers = [cp.ConstTransfer(1, Food_WW, priority=1)]
-
-Food_WW.transfers = [cp.ConstTransfer(1, Food_WW_N, priority=1)]
-
-Food_EoL.transfers = [cp.StochasticTransfer(tf.TriangTruncDet,[0.495, 0.99, 1.485, 1, 0, 1], MMSW, priority=1), 
-                       cp.StochasticTransfer(nr.triangular, [0.005, 0.01, 0.015], PackW, priority=1) ]
-
-
-# In[36]:
-
-
-# Textiles
-Textiles_Use.localRelease = cp.ListRelease([0.5,0.3,0.2])
-
-Textiles_EoL.localRelease = cp.ListRelease([0.01222447,0.2144029,0.5467453,0.2144029,0.01222447]) 
-
-Textiles_Use.transfers = [cp.ConstTransfer(1, Textiles_WW, priority=1),
-                          cp.StochasticTransfer(nr.triangular, [0.10,0.20,0.30], Textiles_Air, priority=2)]
-
-Textiles_WW.transfers = [cp.StochasticTransfer(nr.uniform, [0.25, 0.75], Textiles_WW_N, priority=1),
-                        cp.StochasticTransfer(nr.uniform, [0.25, 0.75], Textiles_WW_M, priority=1)]
-
-Textiles_Air.transfers = [cp.StochasticTransfer(nr.uniform, [1e-6, 1], Textiles_Air_N, priority=1),
-                         cp.StochasticTransfer(nr.uniform, [1e-6, 1], Textiles_Air_M, priority=1)]
-
-Textiles_EoL.transfers = [cp.ConstTransfer(1, TextW, priority=1)]
 
 
 # In[37]:
@@ -1073,17 +859,11 @@ s = 10000 #sampling size used for sampling in uncertainty ranges of several sour
 
 
 # Gather all pristine flows to wastewater
-PersCare_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
 OutPaints_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
 InPaints_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
 Cement_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
 Glass_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
 Ceramics_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
-RubPlas_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
-Electronics_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
-CleanAgents_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
-Food_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
-Textiles_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
 
 # Gather all matrix-embedded flows to wastewater
 OutPaints_WW_M.transfers = [cp.ConstTransfer(1, WW_M, priority=1)]
@@ -1091,9 +871,6 @@ InPaints_WW_M.transfers = [cp.ConstTransfer(1, WW_M, priority=1)]
 Cement_WW_M.transfers = [cp.ConstTransfer(1, WW_M, priority=1)]
 Glass_WW_M.transfers = [cp.ConstTransfer(1, WW_M, priority=1)]
 Ceramics_WW_M.transfers = [cp.ConstTransfer(1, WW_M, priority=1)]
-RubPlas_WW_M.transfers = [cp.ConstTransfer(1, WW_M, priority=1)]
-Electronics_WW_M.transfers = [cp.ConstTransfer(1, WW_M, priority=1)]
-Textiles_WW_M.transfers = [cp.ConstTransfer(1, WW_M, priority=1)]
 
 
 # In[40]:
@@ -1902,21 +1679,6 @@ WEEE_Plastics_OA.transfers = [ cp.RandomChoiceTransfer(Resorting, WEEE_Resorting
 
 WEEE_Resorting.transfers = [cp.StochasticTransfer(nr.triangular, [0.05, 0.1, 0.15], Sorting_Disposal, priority=2),
                             cp.ConstTransfer(1, Reprocess_Plas_P, priority=1)]
-
-
-# Textile Waste (Clothing)    
-TextW_Ex = np.concatenate([nr.triangular(0.15, 0.3, 0.3, int(0.273*s)), nr.uniform(0.3, 0.4, int(0.364*s)), nr.triangular(0.4, 0.4, 0.6, int(0.364*s))])
-TextW_RU = np.concatenate([nr.triangular(0.015, 0.03, 0.03, int(0.073*s)), nr.uniform(0.03, 0.1, int(0.683*s)), nr.triangular(0.1, 0.1, 0.15, int(0.244*s))])
-TextW_WIPLF = np.concatenate([nr.triangular(0.05, 0.1, 0.1, int(0.222*s)), nr.uniform(0.1, 0.15, int(0.444*s)), nr.triangular(0.15, 0.15, 0.225, int(0.333*s))])
-Sorting_TextW.transfers = [cp.RandomChoiceTransfer(TextW_Ex, SortTextW_Export_P, priority=2),
-                           cp.RandomChoiceTransfer(TextW_RU, Textiles_Use, priority=2),
-                           cp.RandomChoiceTransfer(TextW_WIPLF, Sorting_Disposal, priority=2), # goes to incineration/landfilling in same shares as MMSW
-                           cp.ConstTransfer(1, TextW_Resorting, priority=1)]
-                             
-TextW_Rpr = np.concatenate([nr.triangular(0.2, 0.4, 0.4, int(0.222*s)), nr.uniform(0.4, 0.6, int(0.444*s)), nr.triangular(0.6, 0.6, 0.9, int(0.333*s))])
-TextW_CR = np.concatenate([nr.triangular(0.25, 0.5, 0.5, int(0.333*s)), nr.uniform(0.5, 0.6, int(0.267*s)), nr.triangular(0.6, 0.6, 0.9, int(0.4*s))])
-TextW_Resorting.transfers = [cp.RandomChoiceTransfer(TextW_Rpr, Reprocess_Text_P, priority=1),
-                             cp.RandomChoiceTransfer(TextW_CR, Sorting_Disposal, priority=1)] #Cleaning rags being disposed in same shares as MMSW
 
 
 # CDW   
