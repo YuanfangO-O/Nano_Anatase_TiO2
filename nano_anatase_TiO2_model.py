@@ -1686,7 +1686,6 @@ TextW_Ex = np.concatenate([nr.triangular(0.15, 0.3, 0.3, int(0.273*s)), nr.unifo
 TextW_RU = np.concatenate([nr.triangular(0.015, 0.03, 0.03, int(0.073*s)), nr.uniform(0.03, 0.1, int(0.683*s)), nr.triangular(0.1, 0.1, 0.15, int(0.244*s))])
 TextW_WIPLF = np.concatenate([nr.triangular(0.05, 0.1, 0.1, int(0.222*s)), nr.uniform(0.1, 0.15, int(0.444*s)), nr.triangular(0.15, 0.15, 0.225, int(0.333*s))])
 Sorting_TextW.transfers = [cp.RandomChoiceTransfer(TextW_Ex, SortTextW_Export_P, priority=2),
-                           cp.RandomChoiceTransfer(TextW_RU, Textiles_Use, priority=2),
                            cp.RandomChoiceTransfer(TextW_WIPLF, Sorting_Disposal, priority=2), # goes to incineration/landfilling in same shares as MMSW
                            cp.ConstTransfer(1, TextW_Resorting, priority=1)]
                              
