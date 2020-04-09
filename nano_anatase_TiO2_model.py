@@ -1442,6 +1442,23 @@ Sorting_Disposal.transfers = [cp.TimeDependendDistributionTransfer([MSW_LF_y0,
 # thus the coefficient of variance is kept to 50%  
 
 
+# In[62]:
+
+
+'''Reprocess_Glass_P'''
+# from crushing galss to air
+
+Reprocess_Glass_P.transfers =[cp.StochasticTransfer(tf.TrapezTrunc, [0.07, 0.47, 0.49, 0.49, 1, 0, 1], Air_Glass,  priority=2), # since Tc from moulding to reuse is 1, here we skip moulding to reuse to simplify the code
+                              cp.ConstTransfer(1, Melting_Glass, priority=1)]
+
+Melting_Glass.transfers=[cp.ConstTransfer(1, MeltGlass_Reuse_T, priority=1)]
+
+# Release form
+Air_Glass.transfers=[cp.StochasticTransfer(tf.TriangTrunc, [0.2, 1.47, 1, 0, 1], Air_NM,priority=2),
+                     cp.ConstTransfer(1, RPAir_M, priority=1)]  
+
+
+
 # In[63]:
 
 
