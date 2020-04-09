@@ -28,8 +28,8 @@ model = Model.Model('nano-TiO2 anatase from 2000 to 2020')
 
 # split of the total inflow to different compartments
 totalInflow = cp.FlowCompartment('Total Inflow', logInflows=True, logOutflows=True)
-Import_Manuf = cp.FlowCompartment('Import to Manufacturing', logInflows=True, logOutflows=True, categories=['Import'])
-Import_Cons = cp.FlowCompartment('Import to Consumption', logInflows=True, logOutflows=True, categories=['Import'])
+#Import_Manuf = cp.FlowCompartment('Import to Manufacturing', logInflows=True, logOutflows=True, categories=['Import'])
+#Import_Cons = cp.FlowCompartment('Import to Consumption', logInflows=True, logOutflows=True, categories=['Import'])
 
 
 # In[7]:
@@ -52,8 +52,8 @@ Manuf_Air_N = cp.Sink('Pristine from Manufacturing to Air', logInflows=True, cat
 
 
 # Manufacturing and waste
-Manuf_Text = cp.FlowCompartment('Manuf Textiles', logInflows=True, logOutflows=True, categories=['Manufacture'])
-Manuf_Plas = cp.FlowCompartment('Manuf Plastics', logInflows=True, logOutflows=True, categories=['Manufacture'])
+#Manuf_Text = cp.FlowCompartment('Manuf Textiles', logInflows=True, logOutflows=True, categories=['Manufacture'])
+#Manuf_Plas = cp.FlowCompartment('Manuf Plastics', logInflows=True, logOutflows=True, categories=['Manufacture'])
 Manuf_Solids = cp.FlowCompartment('Manuf Solids', logInflows=True, logOutflows=True, categories=['Manufacture'])
 Manuf_Liquids = cp.FlowCompartment('Manuf Liquids', logInflows=True, logOutflows=True, categories=['Manufacture'])
 
@@ -341,8 +341,8 @@ SortWEEE_Export_P = cp.Sink('From Sorting WEEE to Export', logInflows=True, cate
 SortTextW_Export_P = cp.Sink('From Sorting Textile waste to Export', logInflows=True, categories=['Export'])
 
 # Definition of Landfill
-ManufTextW_Landfill_P = cp.Sink('Product-embedded from Textile manufacturing waste to Landfill', logInflows=True, categories=['Landfill', 'Landfill_P', 'Product-embedded'])
-ManufPlasW_Landfill_P = cp.Sink('Product-embedded from Plastics manufacturing waste to Landfill', logInflows=True, categories=['Landfill', 'Landfill_P', 'Product-embedded'])
+#ManufTextW_Landfill_P = cp.Sink('Product-embedded from Textile manufacturing waste to Landfill', logInflows=True, categories=['Landfill', 'Landfill_P', 'Product-embedded'])
+#ManufPlasW_Landfill_P = cp.Sink('Product-embedded from Plastics manufacturing waste to Landfill', logInflows=True, categories=['Landfill', 'Landfill_P', 'Product-embedded'])
 STPSlud_Landfill_N = cp.Sink('Pristine from STP Sludge to Landfill', logInflows=True, categories=['Landfill', 'Landfill_N', 'Pristine'])
 STPSlud_Landfill_M = cp.Sink('Matrix-embedded from STP Sludge to Landfill', logInflows=True, categories=['Landfill', 'Landfill_M', 'Matrix-embedded'])
 STPSlud_Landfill_T = cp.Sink('Transformed from STP Sludge to Landfill', logInflows=True, categories=['Landfill', 'Landfill_T', 'Transformed'])
@@ -541,7 +541,7 @@ compartmentList=[totalInflow,
                  
                  SortWEEE_Export_P, SortTextW_Export_P,
                  
-                 ManufTextW_Landfill_P, ManufPlasW_Landfill_P, STPSlud_Landfill_N, STPSlud_Landfill_M, STPSlud_Landfill_T,
+                 STPSlud_Landfill_N, STPSlud_Landfill_M, STPSlud_Landfill_T,
                  MMSW_Landfill_P, CDW_Landfill_P, SortCDWGlass_Landfill_P, SortCDWMiner_Landfill_P, SortDisp_Landfill_P,
                  GranuPlas_Landfill_P, BaliText_Landfill_P, PuriSlag_Landfill_T, PuriSlag_Landfill_P,
                  SortMiner_Landfill_P, Filterash_Landfill_N, Filterash_Landfill_T, Bottomash_Landfill_N, Bottomash_Landfill_T,
