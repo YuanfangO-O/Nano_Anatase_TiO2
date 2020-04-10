@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# Original Authur: Adam Veronique
+# Modified by Yuanfang Zheng
+
+
 # In[2]:
 
 
@@ -69,9 +73,13 @@ PersCare = cp.FlowCompartment('PersCare', logInflows=True, logOutflows=True, cat
 PersCare_Use = cp.Stock('PersCare_Use', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','Use','PMCrel'])
 PersCare_EoL = cp.Stock('PersCare_EoL', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','EoL'])
 
-Paints = cp.FlowCompartment('Paints', logInflows=True, logOutflows=True, categories='Products')
-Paints_Use = cp.Stock('Paints_Use', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','Use','PMCrel'])
-Paints_EoL = cp.Stock('Paints_EoL', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','EoL'])
+OutPaints = cp.FlowCompartment('OutPaints', logInflows=True, logOutflows=True, categories='Products')
+OutPaints_Use = cp.Stock('OutPaints_Use', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','Use','PMCrel'])
+OutPaints_EoL = cp.Stock('OutPaints_EoL', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','EoL'])
+
+InPaints = cp.FlowCompartment('InPaints', logInflows=True, logOutflows=True, categories='Products')
+InPaints_Use = cp.Stock('InPaints_Use', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','Use','PMCrel'])
+InPaints_EoL = cp.Stock('InPaints_EoL', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','EoL'])
 
 Cement= cp.FlowCompartment('Cement', logInflows=True, logOutflows=True, categories='Products')
 Cement_Use =cp.Stock('Cement_Use', logInflows=True, logOutflows=True, logImmediateFlows=True, categories=['PMC','Use','PMCrel'])
@@ -118,15 +126,25 @@ PersCare_WW_N = cp.FlowCompartment('Pristine in Wastewater from PersCare', logIn
 PersCare_SW = cp.FlowCompartment('From PersCare to Surfacewater', logInflows=True, logOutflows=True, categories=['Surfacewater'])
 PersCare_SW_N = cp.Sink('Pristine in Surfacewater from PersCare', logInflows=True, categories=['Surfacewater_N', 'Pristine'])
 
-Paints_Air = cp.FlowCompartment('From Paints to Air', logInflows=True, logOutflows=True, categories=['Air'])
-Paints_Air_N = cp.Sink('Pristine in Air from Paints', logInflows=True, categories=['Air_N', 'Pristine'])
-Paints_Air_M = cp.Sink('Matrix-embedded in Air from Paints', logInflows=True, categories=['Air_M', 'Matrix-embedded'])
-Paints_WW = cp.FlowCompartment('From Paints to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater'])
-Paints_WW_N = cp.FlowCompartment('Pristine in Wastewater from Paints', logInflows=True, logOutflows=True, categories=['Wastewater_N', 'Pristine'])
-Paints_WW_M = cp.FlowCompartment('Matrix-embedded in Wastewater from Paints', logInflows=True, logOutflows=True, categories=['Wastewater_M', 'Matrix-embedded'])
-Paints_NUsoil = cp.FlowCompartment('From Paints to Soil', logInflows=True, logOutflows=True, categories=['Soil', 'NU Soil'])
-Paints_NUsoil_N = cp.Sink('Pristine in Soil from Paints', logInflows=True, categories=['Soil_N', 'NU Soil_N', 'Pristine'])
-Paints_NUsoil_M = cp.Sink('Matrix-embedded in Soil from Paints', logInflows=True, categories=['Soil_M', 'NU Soil_M', 'Matrix-embedded'])
+OutPaints_Air = cp.FlowCompartment('From OutPaints to Air', logInflows=True, logOutflows=True, categories=['Air'])
+OutPaints_Air_N = cp.Sink('Pristine in Air from OutPaints', logInflows=True, categories=['Air_N', 'Pristine'])
+OutPaints_Air_M = cp.Sink('Matrix-embedded in Air from OutPaints', logInflows=True, categories=['Air_M', 'Matrix-embedded'])
+OutPaints_WW = cp.FlowCompartment('From OutPaints to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater'])
+OutPaints_WW_N = cp.FlowCompartment('Pristine in Wastewater from OutPaints', logInflows=True, logOutflows=True, categories=['Wastewater_N', 'Pristine'])
+OutPaints_WW_M = cp.FlowCompartment('Matrix-embedded in Wastewater from OutPaints', logInflows=True, logOutflows=True, categories=['Wastewater_M', 'Matrix-embedded'])
+OutPaints_NUsoil = cp.FlowCompartment('From OutPaints to Soil', logInflows=True, logOutflows=True, categories=['Soil', 'NU Soil'])
+OutPaints_NUsoil_N = cp.Sink('Pristine in Soil from OutPaints', logInflows=True, categories=['Soil_N', 'NU Soil_N', 'Pristine'])
+OutPaints_NUsoil_M = cp.Sink('Matrix-embedded in Soil from OutPaints', logInflows=True, categories=['Soil_M', 'NU Soil_M', 'Matrix-embedded'])
+
+InPaints_Air = cp.FlowCompartment('From InPaints to Air', logInflows=True, logOutflows=True, categories=['Air'])
+InPaints_Air_N = cp.Sink('Pristine in Air from InPaints', logInflows=True, categories=['Air_N', 'Pristine'])
+InPaints_Air_M = cp.Sink('Matrix-embedded in Air from InPaints', logInflows=True, categories=['Air_M', 'Matrix-embedded'])
+InPaints_WW = cp.FlowCompartment('From InPaints to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater'])
+InPaints_WW_N = cp.FlowCompartment('Pristine in Wastewater from InPaints', logInflows=True, logOutflows=True, categories=['Wastewater_N', 'Pristine'])
+InPaints_WW_M = cp.FlowCompartment('Matrix-embedded in Wastewater from InPaints', logInflows=True, logOutflows=True, categories=['Wastewater_M', 'Matrix-embedded'])
+InPaints_NUsoil = cp.FlowCompartment('From InPaints to Soil', logInflows=True, logOutflows=True, categories=['Soil', 'NU Soil'])
+InPaints_NUsoil_N = cp.Sink('Pristine in Soil from InPaints', logInflows=True, categories=['Soil_N', 'NU Soil_N', 'Pristine'])
+InPaints_NUsoil_M = cp.Sink('Matrix-embedded in Soil from InPaints', logInflows=True, categories=['Soil_M', 'NU Soil_M', 'Matrix-embedded'])
 
 Cement_WW = cp.FlowCompartment('From Cement to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater'])
 Cement_WW_N = cp.FlowCompartment('Pristine from Cement to Wastewater', logInflows=True, logOutflows=True, categories=['Wastewater_N', 'Pristine'])
@@ -457,7 +475,8 @@ compartmentList=[totalInflow, Import_Manuf, Import_Cons,
                  ManufSolidW_Reuse_P, ManufTextW_Reuse_P, ManufPlasW_Reuse_P,
                  Consumption,
                  PersCare, PersCare_Use, PersCare_EoL,
-                 Paints, Paints_Use, Paints_EoL,
+                 OutPaints, OutPaints_Use, OutPaints_EoL,
+                 InPaints, InPaints_Use, InPaints_EoL,
                  Cement, Cement_Use, Cement_EoL,
                  Glass, Glass_Use, Glass_EoL,
                  Ceramics, Ceramics_Use, Ceramics_EoL,
@@ -469,8 +488,10 @@ compartmentList=[totalInflow, Import_Manuf, Import_Cons,
                  Textiles, Textiles_Use, Textiles_EoL,
                  
                  PersCare_WW, PersCare_WW_N, PersCare_SW, PersCare_SW_N,
-                 Paints_Air, Paints_Air_N, Paints_Air_M, Paints_WW, Paints_WW_N, Paints_WW_M, 
-                 Paints_NUsoil, Paints_NUsoil_N, Paints_NUsoil_M,
+                 OutPaints_Air, OutPaints_Air_N, OutPaints_Air_M, OutPaints_WW, OutPaints_WW_N, OutPaints_WW_M, 
+                 OutPaints_NUsoil, OutPaints_NUsoil_N, OutPaints_NUsoil_M,
+                 InPaints_Air, InPaints_Air_N, InPaints_Air_M, InPaints_WW, InPaints_WW_N, InPaints_WW_M, 
+                 InPaints_NUsoil, InPaints_NUsoil_N, InPaints_NUsoil_M,
                  Cement_WW, Cement_WW_N, Cement_WW_M,
                  Glass_WW, Glass_WW_N, Glass_WW_M, Glass_Air, Glass_Air_N, Glass_Air_M, 
                  Glass_NUsoil, Glass_NUsoil_N, Glass_NUsoil_M,
@@ -570,7 +591,7 @@ periodRange = np.arange(0,31)
 # Setting inflow to production
 model.addInflow(cp.ExternalListInflow(totalInflow, [cp.RandomChoiceInflow(Productionvolume_AUT[x]) for x in periodRange]))
 
-# Adding imports.
+# Adding imports. (country-specific)
 SF_Prod = 0
 SF_Manuf = nr.triangular(0.0146*(1-0.22), 0.0146, 0.0146*(1+0.22), 10000)
 SF_Cons = nr.triangular(0.0165*(1-0.34), 0.0165, 0.0165*(1+0.34), 10000)
@@ -637,7 +658,8 @@ manuf_plastics_waste.transfers = [cp.RandomChoiceTransfer(tf.TriangTruncDet(0.45
 
 # ENM allocation to product categories
 Consumption.transfers = [cp.StochasticTransfer(nr.triangular, [0.72, 0.76, 0.81], PersCare),
-                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0508, 0.10], Paints),
+                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0508, 0.10], OutPaints),
+                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0508, 0.10], InPaints),
                          cp.StochasticTransfer(nr.triangular, [0.00, 0.0286, 0.05], Cement),
                          cp.StochasticTransfer(nr.triangular, [0.00, 0.0286, 0.05], Glass),
                          cp.StochasticTransfer(nr.triangular, [0.00, 0.0286, 0.05], Ceramics),
@@ -653,11 +675,21 @@ Consumption.transfers = [cp.StochasticTransfer(nr.triangular, [0.72, 0.76, 0.81]
 
 
 # Products categories to their USE and EoL compartments
-PersCare.transfers = [cp.ConstTransfer(1, PersCare_Use, priority=1),
-                      cp.StochasticTransfer(nr.triangular, [0.025, 0.05, 0.075], PersCare_EoL, priority=2)] 
 
-Paints.transfers = [cp.ConstTransfer(1, Paints_EoL, priority=1),
-                    cp.StochasticTransfer(nr.triangular, [0.005, 0.01, 0.015], Paints_Use, priority=2)]
+#For pigment TiO2
+#PersCare.transfers = [cp.ConstTransfer(1, PersCare_Use, priority=1),
+#                      cp.StochasticTransfer(nr.triangular, [0.069, 0.11, 0.151], PersCare_EoL, priority=2)] 
+
+
+#For nano-TiO2 composites
+PersCare.transfers = [cp.ConstTransfer(1, PersCare_Use, priority=1),
+                      cp.StochasticTransfer(nr.triangular, [0.095, 0.15, 0.206], PersCare_EoL, priority=2)] #Updated based on Keller et al. (2014)
+
+OutPaints.transfers = [cp.ConstTransfer(1, OutPaints_EoL, priority=1),
+                    cp.StochasticTransfer(nr.triangular, [0.005, 0.01, 0.015], OutPaints_Use, priority=2)]
+
+InPaints.transfers = [cp.ConstTransfer(1, InPaints_EoL, priority=1),
+                    cp.StochasticTransfer(tf.TriangTrunc, [0.001, 3.22, 1, 0, 1], InPaints_Use, priority=2)],
 
 Cement.transfers = [cp.ConstTransfer(1, Cement_EoL, priority=1),
                     cp.StochasticTransfer(nr.triangular, [0.005, 0.01, 0.015], Cement_Use, priority=2)]
@@ -698,9 +730,16 @@ PersCare_Use.localRelease = cp.ListRelease([0.90,0.10])
 
 PersCare_EoL.localRelease = cp.ListRelease([0.90,0.10]) 
 
+# For pigment-TiO2
+#PersCare_Use.transfers = [cp.ConstTransfer(1, PersCare_WW, priority=1)],
+#
+#PersCare_WW.transfers = [cp.ConstTransfer(1, PersCare_WW_N, priority=1)]
+#
+#PersCare_EoL.transfers = [cp.ConstTransfer(1, PackW, priority=1)]
 
+# For nano-TiO2 composites
 PersCare_Use.transfers = [cp.ConstTransfer(1, PersCare_WW, priority=1),
-                          cp.StochasticTransfer(nr.triangular, [0.05,0.10,0.15], PersCare_SW, priority=2)]
+                          cp.StochasticTransfer(nr.triangular, [0.025,0.04,0.055], PersCare_SW, priority=2)]
 
 PersCare_WW.transfers = [cp.ConstTransfer(1, PersCare_WW_N, priority=1)]
 
@@ -712,11 +751,11 @@ PersCare_EoL.transfers = [cp.ConstTransfer(1, PackW, priority=1)]
 # In[27]:
 
 
-# Paints                           
-Paints_Use.localRelease = cp.ListRelease([0.9,0.01666667,0.01666667,0.01666667,0.01666667,
+# OutPaints                           
+OutPaints_Use.localRelease = cp.ListRelease([0.9,0.01666667,0.01666667,0.01666667,0.01666667,
                                           0.01666667,0.01666667])
 
-Paints_EoL.localRelease = cp.ListRelease([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+OutPaints_EoL.localRelease = cp.ListRelease([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                                          0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                                          0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.001722281,
                                          0.001037804,0.001572363,0.00232936,0.003374171,0.004779078,
@@ -728,21 +767,57 @@ Paints_EoL.localRelease = cp.ListRelease([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                                          0.01536449,0.01186737,0.00896268,0.006618624,0.004779078,
                                          0.003374171,0.00232936,0.001572363,0.001037804,0.001722281]) 
 
-Paints_Use.transfers = [cp.StochasticTransfer(nr.triangular, [0.25, 0.50, 0.75], Paints_WW, priority=1),
-                        cp.StochasticTransfer(nr.triangular, [0.125, 0.25,0.375], Paints_Air, priority=1),
-                        cp.StochasticTransfer(nr.triangular, [0.125, 0.25,0.375], Paints_NUsoil, priority=1)]
+OutPaints_Use.transfers = [cp.StochasticTransfer(nr.triangular, [0.25, 0.50, 0.75], OutPaints_WW, priority=1),
+                        cp.StochasticTransfer(nr.triangular, [0.125, 0.25,0.375], OutPaints_Air, priority=1),
+                        cp.StochasticTransfer(nr.triangular, [0.125, 0.25,0.375], OutPaints_NUsoil, priority=1)]
 
-Paints_WW.transfers = [cp.StochasticTransfer(nr.triangular, [0.15, 0.30, 0.45], Paints_WW_N, priority=1),
-                      cp.StochasticTransfer(tf.TriangTruncDet, [0.35, 0.7, 1.05, 1, 0, 1], Paints_WW_M, priority=1)]
+OutPaints_WW.transfers = [cp.StochasticTransfer(nr.triangular, [0.15, 0.30, 0.45], OutPaints_WW_N, priority=1),
+                      cp.StochasticTransfer(tf.TriangTruncDet, [0.35, 0.7, 1.05, 1, 0, 1], OutPaints_WW_M, priority=1)]
 
-Paints_Air.transfers = [cp.StochasticTransfer(nr.uniform, [1e-6, 1], Paints_Air_N, priority=1),
-                       cp.StochasticTransfer(nr.uniform, [1e-6, 1], Paints_Air_M, priority=1)]
+OutPaints_Air.transfers = [cp.StochasticTransfer(nr.uniform, [1e-6, 1], OutPaints_Air_N, priority=1),
+                       cp.StochasticTransfer(nr.uniform, [1e-6, 1], OutPaints_Air_M, priority=1)]
 
-Paints_NUsoil.transfers = [cp.StochasticTransfer(nr.triangular, [0.15, 0.30, 0.45], Paints_NUsoil_N, priority=1),
-                           cp.StochasticTransfer(tf.TriangTruncDet, [0.35, 0.70, 1.05, 1, 0, 1], Paints_NUsoil_M, priority=1)]
+OutPaints_NUsoil.transfers = [cp.StochasticTransfer(nr.triangular, [0.15, 0.30, 0.45], OutPaints_NUsoil_N, priority=1),
+                           cp.StochasticTransfer(tf.TriangTruncDet, [0.35, 0.70, 1.05, 1, 0, 1], OutPaints_NUsoil_M, priority=1)]
 
-Paints_EoL.transfers = [cp.StochasticTransfer(tf.TriangTruncDet, [0.475, 0.95, 1.9, 1, 0, 1], CDW, priority=1),
+OutPaints_EoL.transfers = [cp.StochasticTransfer(tf.TriangTruncDet, [0.475, 0.95, 1.9, 1, 0, 1], CDW, priority=1),
                         cp.StochasticTransfer(nr.triangular, [0.025, 0.05, 0.075], MMSW, priority=1)]
+
+
+# In[27.5]:
+
+# InPaints                           
+
+InPaints_Use.localRelease = cp.FixedRateRelease(0.1)
+
+InPaints_EoL.localRelease = cp.ListRelease([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                                         0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                                         0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.001722281,
+                                         0.001037804,0.001572363,0.00232936,0.003374171,0.004779078,
+                                         0.006618624,0.00896268,0.01186737,0.01536449,0.01945038,
+                                         0.02407602,0.0291399,0.03448561,0.03990567,0.04515209,
+                                         0.04995371,0.05403864,0.0571594,0.05911772,0.05978529, 
+                                         0.05911772,0.0571594,0.05403864,0.04995371,0.04515209,
+                                         0.03990567,0.03448561,0.0291399,0.02407602,0.01945038,
+                                         0.01536449,0.01186737,0.00896268,0.006618624,0.004779078,
+                                         0.003374171,0.00232936,0.001572363,0.001037804,0.001722281]) 
+
+InPaints_Use.transfers = [cp.StochasticTransfer(nr.triangular, [0.09, 0.11, 0.136], InPaints_WW, priority=1),
+                        cp.StochasticTransfer(nr.triangular, [0.125, 0.25,0.375], InPaints_Air, priority=1),
+                        cp.StochasticTransfer(nr.triangular, [0.512, 0.64,0.768], InPaints_NUsoil, priority=1)]
+
+InPaints_WW.transfers = [cp.StochasticTransfer(nr.triangular, [0.15, 0.30, 0.45], InPaints_WW_N, priority=1),
+                      cp.StochasticTransfer(tf.TriangTruncDet, [0.35, 0.7, 1.05, 1, 0, 1], InPaints_WW_M, priority=1)]
+
+InPaints_Air.transfers = [cp.StochasticTransfer(nr.uniform, [1e-6, 1], InPaints_Air_N, priority=1),
+                       cp.StochasticTransfer(nr.uniform, [1e-6, 1], InPaints_Air_M, priority=1)]
+
+InPaints_NUsoil.transfers = [cp.StochasticTransfer(nr.triangular, [0.15, 0.30, 0.45], InPaints_NUsoil_N, priority=1),
+                           cp.StochasticTransfer(tf.TriangTruncDet, [0.35, 0.70, 1.05, 1, 0, 1], InPaints_NUsoil_M, priority=1)]
+
+InPaints_EoL.transfers = [cp.StochasticTransfer(tf.TriangTruncDet, [0.475, 0.95, 1.9, 1, 0, 1], CDW, priority=1),
+                        cp.StochasticTransfer(nr.triangular, [0.025, 0.05, 0.075], MMSW, priority=1)]
+
 
 
 # In[28]:
@@ -999,7 +1074,8 @@ s = 10000 #sampling size used for sampling in uncertainty ranges of several sour
 
 # Gather all pristine flows to wastewater
 PersCare_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
-Paints_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
+OutPaints_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
+InPaints_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
 Cement_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
 Glass_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
 Ceramics_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
@@ -1010,7 +1086,8 @@ Food_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
 Textiles_WW_N.transfers = [cp.ConstTransfer(1, WW_N, priority=1)]
 
 # Gather all matrix-embedded flows to wastewater
-Paints_WW_M.transfers = [cp.ConstTransfer(1, WW_M, priority=1)]
+OutPaints_WW_M.transfers = [cp.ConstTransfer(1, WW_M, priority=1)]
+InPaints_WW_M.transfers = [cp.ConstTransfer(1, WW_M, priority=1)]
 Cement_WW_M.transfers = [cp.ConstTransfer(1, WW_M, priority=1)]
 Glass_WW_M.transfers = [cp.ConstTransfer(1, WW_M, priority=1)]
 Ceramics_WW_M.transfers = [cp.ConstTransfer(1, WW_M, priority=1)]
@@ -1350,29 +1427,28 @@ TreatIII_M.transfers = [cp.RandomChoiceTransfer(RemovalData_TreatIII_M, STPsludg
 # It results a scaling factor of 2.416. 
 # Before multiplication by 2.416, distributions must not exceed 0.414.
 
-SF_SG_WIP = 2.416
 
-SG_WIIP_y0_data = (nr.triangular(0.1887, 0.209, 0.2293, s))*SF_SG_WIP
-SG_WIIP_y1_data = (nr.triangular(0.1822, 0.213, 0.2438, s))*SF_SG_WIP
-SG_WIIP_y2_data = (nr.triangular(0.1754, 0.217, 0.2586, s))*SF_SG_WIP
-SG_WIIP_y3_data = (nr.triangular(0.1792, 0.221, 0.2628, s))*SF_SG_WIP
-SG_WIIP_y4_data = (nr.triangular(0.1943, 0.225, 0.2557, s))*SF_SG_WIP
-SG_WIIP_y5_data = (nr.triangular(0.2098, 0.229, 0.2482, s))*SF_SG_WIP
-SG_WIIP_y6_data = (nr.triangular(0.2170, 0.256, 0.2950, s))*SF_SG_WIP
-SG_WIIP_y7_data = (nr.triangular(0.2228, 0.286, 0.3492, s))*SF_SG_WIP
-SG_WIIP_y8_data = (nr.triangular(0.2411, 0.317, 0.3929, s))*SF_SG_WIP
-SG_WIIP_y9_data = (nr.triangular(0.2526, 0.319, 0.3854, s))*SF_SG_WIP
-SG_WIIP_y10_data = (nr.triangular(0.2643, 0.321, 0.3777, s))*SF_SG_WIP
-SG_WIIP_y11_data = (nr.triangular(0.2231, 0.315, 0.4069, s))*SF_SG_WIP
-SG_WIIP_y12_data = (tf.TriangTruncDet(0.1868, 0.315, 0.4432, s, 0, 0.414))*SF_SG_WIP
-SG_WIIP_y13_data = (tf.TriangTruncDet(0.1780, 0.308, 0.4381, s, 0, 0.414))*SF_SG_WIP
-SG_WIIP_y14_data = (tf.TriangTruncDet(0.1693, 0.301, 0.4327, s, 0, 0.414))*SF_SG_WIP
-SG_WIIP_y15_data = (tf.TriangTruncDet(0.1614, 0.315, 0.4686, s, 0, 0.414))*SF_SG_WIP
-SG_WIIP_y16_data = (tf.TriangTruncDet(0.1645, 0.329, 0.4935, s, 0, 0.414))*SF_SG_WIP
-SG_WIIP_y17_data = (tf.TriangTruncDet(0.1715, 0.343, 0.5145, s, 0, 0.414))*SF_SG_WIP
-SG_WIIP_y18_data = (tf.TriangTruncDet(0.1785, 0.357, 0.5355, s, 0, 0.414))*SF_SG_WIP
-SG_WIIP_y19_data = (tf.TriangTruncDet(0.1901, 0.371, 0.5519, s, 0, 0.414))*SF_SG_WIP
-SG_WIIP_y20_data = (tf.TriangTruncDet(0.2171, 0.386, 0.5549, s, 0, 0.414))*SF_SG_WIP
+SG_WIIP_y0_data = (nr.triangular(0.1887, 0.209, 0.2293, s))
+SG_WIIP_y1_data = (nr.triangular(0.1822, 0.213, 0.2438, s))
+SG_WIIP_y2_data = (nr.triangular(0.1754, 0.217, 0.2586, s))
+SG_WIIP_y3_data = (nr.triangular(0.1792, 0.221, 0.2628, s))
+SG_WIIP_y4_data = (nr.triangular(0.1943, 0.225, 0.2557, s))
+SG_WIIP_y5_data = (nr.triangular(0.2098, 0.229, 0.2482, s))
+SG_WIIP_y6_data = (nr.triangular(0.2170, 0.256, 0.2950, s))
+SG_WIIP_y7_data = (nr.triangular(0.2228, 0.286, 0.3492, s))
+SG_WIIP_y8_data = (nr.triangular(0.2411, 0.317, 0.3929, s))
+SG_WIIP_y9_data = (nr.triangular(0.2526, 0.319, 0.3854, s))
+SG_WIIP_y10_data = (nr.triangular(0.2643, 0.321, 0.3777, s))
+SG_WIIP_y11_data = (nr.triangular(0.2231, 0.315, 0.4069, s))
+SG_WIIP_y12_data = (tf.TriangTruncDet(0.1868, 0.315, 0.4432, s, 0, 0.414))
+SG_WIIP_y13_data = (tf.TriangTruncDet(0.1780, 0.308, 0.4381, s, 0, 0.414))
+SG_WIIP_y14_data = (tf.TriangTruncDet(0.1693, 0.301, 0.4327, s, 0, 0.414))
+SG_WIIP_y15_data = (tf.TriangTruncDet(0.1614, 0.315, 0.4686, s, 0, 0.414))
+SG_WIIP_y16_data = (tf.TriangTruncDet(0.1645, 0.329, 0.4935, s, 0, 0.414))
+SG_WIIP_y17_data = (tf.TriangTruncDet(0.1715, 0.343, 0.5145, s, 0, 0.414))
+SG_WIIP_y18_data = (tf.TriangTruncDet(0.1785, 0.357, 0.5355, s, 0, 0.414))
+SG_WIIP_y19_data = (tf.TriangTruncDet(0.1901, 0.371, 0.5519, s, 0, 0.414))
+SG_WIIP_y20_data = (tf.TriangTruncDet(0.2171, 0.386, 0.5549, s, 0, 0.414))
 
 SG_WIIP_y0 = cp.TransferDistribution(nr.choice, [SG_WIIP_y0_data])
 SG_WIIP_y1 = cp.TransferDistribution(nr.choice, [SG_WIIP_y1_data])
@@ -1400,29 +1476,29 @@ SG_WIIP_y20 = cp.TransferDistribution(nr.choice, [SG_WIIP_y20_data])
 # Eurostat, for year 2014: 1.99% landfilled in Austria.
 # Mean of this value for Europe for year 2014: 10.5% (this model).
 # It results a scaling factor of 0.189.
-SF_SG_LF = 0.189
 
-SG_LF_y0_data = (nr.triangular(0.1887, 0.209, 0.2293, s))*SF_SG_LF
-SG_LF_y1_data = (nr.triangular(0.1780, 0.208, 0.2380, s))*SF_SG_LF
-SG_LF_y2_data = (nr.triangular(0.1681, 0.208, 0.2479, s))*SF_SG_LF
-SG_LF_y3_data = (nr.triangular(0.1678, 0.207, 0.2462, s))*SF_SG_LF
-SG_LF_y4_data = (nr.triangular(0.1779, 0.206, 0.2341, s))*SF_SG_LF
-SG_LF_y5_data = (nr.triangular(0.1878, 0.205, 0.2222, s))*SF_SG_LF
-SG_LF_y6_data = (nr.triangular(0.1729, 0.204, 0.2351, s))*SF_SG_LF
-SG_LF_y7_data = (nr.triangular(0.1581, 0.203, 0.2479, s))*SF_SG_LF
-SG_LF_y8_data = (nr.triangular(0.1544, 0.203, 0.2516, s))*SF_SG_LF
-SG_LF_y9_data = (nr.triangular(0.1457, 0.184, 0.2223, s))*SF_SG_LF
-SG_LF_y10_data = (nr.triangular(0.1375, 0.167, 0.1965, s))*SF_SG_LF
-SG_LF_y11_data = (nr.triangular(0.1069, 0.151, 0.1951, s))*SF_SG_LF
-SG_LF_y12_data = (nr.triangular(0.0818, 0.138, 0.1942, s))*SF_SG_LF
-SG_LF_y13_data = (nr.triangular(0.0699, 0.121, 0.1721, s))*SF_SG_LF
-SG_LF_y14_data = (nr.triangular(0.0591, 0.105, 0.1509, s))*SF_SG_LF
-SG_LF_y15_data = (nr.triangular(0.0567, 0.102, 0.1473, s))*SF_SG_LF
-SG_LF_y16_data = (nr.triangular(0.0539, 0.098, 0.1421, s))*SF_SG_LF
-SG_LF_y17_data = (nr.triangular(0.0516, 0.095, 0.1384, s))*SF_SG_LF
-SG_LF_y18_data = (nr.triangular(0.0579, 0.091, 0.1241, s))*SF_SG_LF
-SG_LF_y19_data = (nr.triangular(0.0642, 0.088, 0.1118, s))*SF_SG_LF
-SG_LF_y20_data = (nr.triangular(0.0692, 0.084, 0.0988, s))*SF_SG_LF
+
+SG_LF_y0_data = (nr.triangular(0.1887, 0.209, 0.2293, s))
+SG_LF_y1_data = (nr.triangular(0.1780, 0.208, 0.2380, s))
+SG_LF_y2_data = (nr.triangular(0.1681, 0.208, 0.2479, s))
+SG_LF_y3_data = (nr.triangular(0.1678, 0.207, 0.2462, s))
+SG_LF_y4_data = (nr.triangular(0.1779, 0.206, 0.2341, s))
+SG_LF_y5_data = (nr.triangular(0.1878, 0.205, 0.2222, s))
+SG_LF_y6_data = (nr.triangular(0.1729, 0.204, 0.2351, s))
+SG_LF_y7_data = (nr.triangular(0.1581, 0.203, 0.2479, s))
+SG_LF_y8_data = (nr.triangular(0.1544, 0.203, 0.2516, s))
+SG_LF_y9_data = (nr.triangular(0.1457, 0.184, 0.2223, s))
+SG_LF_y10_data = (nr.triangular(0.1375, 0.167, 0.1965, s))
+SG_LF_y11_data = (nr.triangular(0.1069, 0.151, 0.1951, s))
+SG_LF_y12_data = (nr.triangular(0.0818, 0.138, 0.1942, s))
+SG_LF_y13_data = (nr.triangular(0.0699, 0.121, 0.1721, s))
+SG_LF_y14_data = (nr.triangular(0.0591, 0.105, 0.1509, s))
+SG_LF_y15_data = (nr.triangular(0.0567, 0.102, 0.1473, s))
+SG_LF_y16_data = (nr.triangular(0.0539, 0.098, 0.1421, s))
+SG_LF_y17_data = (nr.triangular(0.0516, 0.095, 0.1384, s))
+SG_LF_y18_data = (nr.triangular(0.0579, 0.091, 0.1241, s))
+SG_LF_y19_data = (nr.triangular(0.0642, 0.088, 0.1118, s))
+SG_LF_y20_data = (nr.triangular(0.0692, 0.084, 0.0988, s))
 
 SG_LF_y0 = cp.TransferDistribution(nr.choice, [SG_LF_y0_data])
 SG_LF_y1 = cp.TransferDistribution(nr.choice, [SG_LF_y1_data])
@@ -1505,29 +1581,28 @@ STPsludge_T.transfers =[cp.TimeDependendDistributionTransfer([SG_WIIP_y0,
 # Eurostat, for year 2014: 11.25% landfilled in Austria.
 # Mean of this value for Europe for year 2014: 47.87% (this model).
 # It results a scaling factor of 0.235.
-SF_MW_LF = 0.235
 
-MSW_LF_Data_y0 = SF_MW_LF*(np.concatenate([nr.triangular(0.461, 0.922, 1.383, s), nr.triangular(0.411, 0.822, 1.233, s), nr.triangular(0.3978, 0.765, 1.1628, s)] ))
-MSW_LF_Data_y1 = SF_MW_LF*(np.concatenate([nr.triangular(0.4495, 0.899, 1.3485, s), nr.triangular(0.4035, 0.807, 1.2105, s), nr.triangular(0.38948, 0.749, 1.1385, s)] ))
-MSW_LF_Data_y2 = SF_MW_LF*(np.concatenate([nr.triangular(0.4708, 0.877, 1.3478, s), nr.triangular(0.3955, 0.791, 1.1865, s), nr.triangular(0.3817, 0.734, 1.11568, s)] ))
-MSW_LF_Data_y3 = SF_MW_LF*(np.concatenate([nr.triangular(0.5231, 0.855, 1.2056, s), nr.triangular(0.4035, 0.773, 1.1765, s), nr.triangular(0.3760, 0.723, 1.099, s)] ))
-MSW_LF_Data_y4 = SF_MW_LF*(np.concatenate([nr.triangular(0.5713, 0.832, 1.1149, s), nr.triangular(0.4347, 0.76, 1.1947, s), nr.triangular(0.3645, 0.701, 1.0655, s)] ))
-MSW_LF_Data_y5 = SF_MW_LF*(np.concatenate([nr.triangular(0.6169, 0.81, 1.0287, s), nr.triangular(0.3826, 0.733, 1.0629, s), nr.triangular(0.3484, 0.67, 0.9916, s)] ))
-MSW_LF_Data_y6 = SF_MW_LF*(np.concatenate([nr.triangular(0.7637, 0.913, 1.0956, s), nr.triangular(0.4021, 0.703, 1.1051, s), nr.triangular(0.3406, 0.655, 0.9694, s)] ))
-MSW_LF_Data_y7 = SF_MW_LF*(np.concatenate([nr.triangular(0.6412, 0.822, 1.0357, s), nr.triangular(0.3581, 0.686, 0.9947, s), nr.triangular(0.33488, 0.644, 0.95312, s)] ))
-MSW_LF_Data_y8 = SF_MW_LF*(np.concatenate([nr.triangular(0.5995, 0.728, 0.8565, s), nr.triangular(0.3815, 0.667, 0.9525, s), nr.triangular(0.31772, 0.611, 0.90428, s)] ))
-MSW_LF_Data_y9 = SF_MW_LF*(np.concatenate([nr.triangular(0.5175, 0.658, 0.7985, s), nr.triangular(0.3377, 0.647, 0.9563, s), nr.triangular(0.312, 0.6, 0.888, s)] ))
-MSW_LF_Data_y10 = SF_MW_LF*(np.concatenate([nr.triangular(0.5072, 0.597, 0.6868, s), nr.triangular(0.3586, 0.627, 0.8954, s), nr.triangular(0.3042, 0.585, 0.8658, s)] ))
-MSW_LF_Data_y11 = SF_MW_LF*(np.concatenate([nr.triangular(0.4582, 0.57, 0.6818, s), nr.triangular(0.3054, 0.585, 0.8646, s), nr.triangular(0.28652, 0.551, 0.81548, s)] ))
-MSW_LF_Data_y12 = SF_MW_LF*(np.concatenate([nr.triangular(0.4193, 0.553, 0.6867, s), nr.triangular(0.3077, 0.538, 0.7683, s), nr.triangular(0.27456, 0.528, 0.78144, s)] ))
-MSW_LF_Data_y13 = SF_MW_LF*(np.concatenate([nr.triangular(0.4355, 0.536, 0.6365, s), nr.triangular(0.2662, 0.51, 0.7538, s), nr.triangular(0.25792, 0.496, 0.73408, s)] ))
-MSW_LF_Data_y14 = SF_MW_LF*(np.concatenate([nr.triangular(0.4200, 0.487, 0.5540, s), nr.triangular(0.2740, 0.479, 0.6840, s), nr.triangular(0.24596, 0.473, 0.70004, s)] ))
-MSW_LF_Data_y15 = SF_MW_LF*(np.concatenate([nr.triangular(0.3831, 0.474, 0.5649, s), nr.triangular(0.2219, 0.425, 0.6282, s), nr.triangular(0.23296, 0.448, 0.66304, s)] ))
-MSW_LF_Data_y16 = SF_MW_LF*(np.concatenate([nr.triangular(0.3468, 0.46, 0.5732, s), nr.triangular(0.1875, 0.375, 0.5625, s), nr.triangular(0.206, 0.412, 0.618, s)] ))
-MSW_LF_Data_y17 = SF_MW_LF*(np.concatenate([nr.triangular(0.3113, 0.445, 0.5787, s), nr.triangular(0.1595, 0.319, 0.4785, s), nr.triangular(0.1895, 0.379, 0.5685, s)] ))
-MSW_LF_Data_y18 = SF_MW_LF*(np.concatenate([nr.triangular(0.3197, 0.429, 0.5383, s), nr.triangular(0.128, 0.256, 0.384, s), nr.triangular(0.1725, 0.345, 0.5175, s)] ))
-MSW_LF_Data_y19 = SF_MW_LF*(np.concatenate([nr.triangular(0.3250, 0.411, 0.4970, s), nr.triangular(0.0925, 0.185, 0.2775, s), nr.triangular(0.154, 0.308, 0.462, s)] ))
-MSW_LF_Data_y20 = SF_MW_LF*(np.concatenate([nr.triangular(0.3271, 0.391, 0.4549, s), nr.triangular(0.0515, 0.103, 0.1545, s), nr.triangular(0.1345, 0.269, 0.4035, s)] ))
+MSW_LF_Data_y0 = (np.concatenate([nr.triangular(0.461, 0.922, 1.383, s), nr.triangular(0.411, 0.822, 1.233, s), nr.triangular(0.3978, 0.765, 1.1628, s)] ))
+MSW_LF_Data_y1 = (np.concatenate([nr.triangular(0.4495, 0.899, 1.3485, s), nr.triangular(0.4035, 0.807, 1.2105, s), nr.triangular(0.38948, 0.749, 1.1385, s)] ))
+MSW_LF_Data_y2 = (np.concatenate([nr.triangular(0.4708, 0.877, 1.3478, s), nr.triangular(0.3955, 0.791, 1.1865, s), nr.triangular(0.3817, 0.734, 1.11568, s)] ))
+MSW_LF_Data_y3 = (np.concatenate([nr.triangular(0.5231, 0.855, 1.2056, s), nr.triangular(0.4035, 0.773, 1.1765, s), nr.triangular(0.3760, 0.723, 1.099, s)] ))
+MSW_LF_Data_y4 = (np.concatenate([nr.triangular(0.5713, 0.832, 1.1149, s), nr.triangular(0.4347, 0.76, 1.1947, s), nr.triangular(0.3645, 0.701, 1.0655, s)] ))
+MSW_LF_Data_y5 = (np.concatenate([nr.triangular(0.6169, 0.81, 1.0287, s), nr.triangular(0.3826, 0.733, 1.0629, s), nr.triangular(0.3484, 0.67, 0.9916, s)] ))
+MSW_LF_Data_y6 = (np.concatenate([nr.triangular(0.7637, 0.913, 1.0956, s), nr.triangular(0.4021, 0.703, 1.1051, s), nr.triangular(0.3406, 0.655, 0.9694, s)] ))
+MSW_LF_Data_y7 = (np.concatenate([nr.triangular(0.6412, 0.822, 1.0357, s), nr.triangular(0.3581, 0.686, 0.9947, s), nr.triangular(0.33488, 0.644, 0.95312, s)] ))
+MSW_LF_Data_y8 = (np.concatenate([nr.triangular(0.5995, 0.728, 0.8565, s), nr.triangular(0.3815, 0.667, 0.9525, s), nr.triangular(0.31772, 0.611, 0.90428, s)] ))
+MSW_LF_Data_y9 = (np.concatenate([nr.triangular(0.5175, 0.658, 0.7985, s), nr.triangular(0.3377, 0.647, 0.9563, s), nr.triangular(0.312, 0.6, 0.888, s)] ))
+MSW_LF_Data_y10 = (np.concatenate([nr.triangular(0.5072, 0.597, 0.6868, s), nr.triangular(0.3586, 0.627, 0.8954, s), nr.triangular(0.3042, 0.585, 0.8658, s)] ))
+MSW_LF_Data_y11 = (np.concatenate([nr.triangular(0.4582, 0.57, 0.6818, s), nr.triangular(0.3054, 0.585, 0.8646, s), nr.triangular(0.28652, 0.551, 0.81548, s)] ))
+MSW_LF_Data_y12 = (np.concatenate([nr.triangular(0.4193, 0.553, 0.6867, s), nr.triangular(0.3077, 0.538, 0.7683, s), nr.triangular(0.27456, 0.528, 0.78144, s)] ))
+MSW_LF_Data_y13 = (np.concatenate([nr.triangular(0.4355, 0.536, 0.6365, s), nr.triangular(0.2662, 0.51, 0.7538, s), nr.triangular(0.25792, 0.496, 0.73408, s)] ))
+MSW_LF_Data_y14 = (np.concatenate([nr.triangular(0.4200, 0.487, 0.5540, s), nr.triangular(0.2740, 0.479, 0.6840, s), nr.triangular(0.24596, 0.473, 0.70004, s)] ))
+MSW_LF_Data_y15 = (np.concatenate([nr.triangular(0.3831, 0.474, 0.5649, s), nr.triangular(0.2219, 0.425, 0.6282, s), nr.triangular(0.23296, 0.448, 0.66304, s)] ))
+MSW_LF_Data_y16 = (np.concatenate([nr.triangular(0.3468, 0.46, 0.5732, s), nr.triangular(0.1875, 0.375, 0.5625, s), nr.triangular(0.206, 0.412, 0.618, s)] ))
+MSW_LF_Data_y17 = (np.concatenate([nr.triangular(0.3113, 0.445, 0.5787, s), nr.triangular(0.1595, 0.319, 0.4785, s), nr.triangular(0.1895, 0.379, 0.5685, s)] ))
+MSW_LF_Data_y18 = (np.concatenate([nr.triangular(0.3197, 0.429, 0.5383, s), nr.triangular(0.128, 0.256, 0.384, s), nr.triangular(0.1725, 0.345, 0.5175, s)] ))
+MSW_LF_Data_y19 = (np.concatenate([nr.triangular(0.3250, 0.411, 0.4970, s), nr.triangular(0.0925, 0.185, 0.2775, s), nr.triangular(0.154, 0.308, 0.462, s)] ))
+MSW_LF_Data_y20 = (np.concatenate([nr.triangular(0.3271, 0.391, 0.4549, s), nr.triangular(0.0515, 0.103, 0.1545, s), nr.triangular(0.1345, 0.269, 0.4035, s)] ))
 
 
 MSW_LF_y0 = cp.TransferDistribution(nr.choice, [MSW_LF_Data_y0])
@@ -1571,29 +1646,28 @@ MMSW.transfers = [cp.TimeDependendDistributionTransfer([MSW_LF_y0,
 # Mean of this value for Europe in year 2014: 21.3% (this model).
 # It results a scaling factor of 2.081.
 # The overall distributions must not exceed 1, so 0.481 (=1/2.081) before multiplication by 2.081.
-SF_PW_MW = 2.081
 
-PW_MW_y0_data = SF_PW_MW*(tf.TriangTruncDet(0.2925, 0.52, 0.7475, s, 0, 0.481))
-PW_MW_y1_data = SF_PW_MW*(tf.TriangTruncDet(0.2998, 0.5, 0.7003, s, 0, 0.481))
-PW_MW_y2_data = SF_PW_MW*(tf.TriangTruncDet(0.3030, 0.476, 0.6490, s, 0, 0.481))
-PW_MW_y3_data = SF_PW_MW*(tf.TriangTruncDet(0.3488, 0.451, 0.5532, s, 0, 0.481))
-PW_MW_y4_data = SF_PW_MW*(tf.TriangTruncDet(0.3516, 0.427, 0.5024, s, 0, 0.481))
-PW_MW_y5_data = SF_PW_MW*(tf.TriangTruncDet(0.3513, 0.42, 0.4887, s, 0, 0.481))
-PW_MW_y6_data = SF_PW_MW*(nr.triangular(0.3457, 0.407, 0.4683, s))
-PW_MW_y7_data = SF_PW_MW*(nr.triangular(0.2887, 0.365, 0.4413, s))
-PW_MW_y8_data = SF_PW_MW*(nr.triangular(0.2358, 0.322, 0.4082, s))
-PW_MW_y9_data = SF_PW_MW*(nr.triangular(0.2166, 0.28, 0.3434, s))
-PW_MW_y10_data = SF_PW_MW*(nr.triangular(0.1952, 0.237, 0.2788, s))
-PW_MW_y11_data = SF_PW_MW*(nr.triangular(0.1869, 0.227, 0.2671, s))
-PW_MW_y12_data = SF_PW_MW*(nr.triangular(0.1771, 0.215, 0.2529, s))
-PW_MW_y13_data = SF_PW_MW*(nr.triangular(0.1163, 0.208, 0.2997, s))
-PW_MW_y14_data = SF_PW_MW*(nr.triangular(0.1191, 0.213, 0.3069, s))
-PW_MW_y15_data = SF_PW_MW*(nr.triangular(0.1191, 0.213, 0.3069, s))
-PW_MW_y16_data = SF_PW_MW*(nr.triangular(0.0718, 0.141, 0.2102, s))
-PW_MW_y17_data = SF_PW_MW*(nr.triangular(0.0585, 0.117, 0.1755, s))
-PW_MW_y18_data = SF_PW_MW*(nr.triangular(0.0465, 0.093, 0.1395, s))
-PW_MW_y19_data = SF_PW_MW*(nr.triangular(0.0345, 0.069, 0.1035, s))
-PW_MW_y20_data = SF_PW_MW*(nr.triangular(0.023, 0.046, 0.069, s))
+PW_MW_y0_data = (tf.TriangTruncDet(0.2925, 0.52, 0.7475, s, 0, 0.481))
+PW_MW_y1_data = (tf.TriangTruncDet(0.2998, 0.5, 0.7003, s, 0, 0.481))
+PW_MW_y2_data = (tf.TriangTruncDet(0.3030, 0.476, 0.6490, s, 0, 0.481))
+PW_MW_y3_data = (tf.TriangTruncDet(0.3488, 0.451, 0.5532, s, 0, 0.481))
+PW_MW_y4_data = (tf.TriangTruncDet(0.3516, 0.427, 0.5024, s, 0, 0.481))
+PW_MW_y5_data = (tf.TriangTruncDet(0.3513, 0.42, 0.4887, s, 0, 0.481))
+PW_MW_y6_data = (nr.triangular(0.3457, 0.407, 0.4683, s))
+PW_MW_y7_data = (nr.triangular(0.2887, 0.365, 0.4413, s))
+PW_MW_y8_data = (nr.triangular(0.2358, 0.322, 0.4082, s))
+PW_MW_y9_data = (nr.triangular(0.2166, 0.28, 0.3434, s))
+PW_MW_y10_data = (nr.triangular(0.1952, 0.237, 0.2788, s))
+PW_MW_y11_data = (nr.triangular(0.1869, 0.227, 0.2671, s))
+PW_MW_y12_data = (nr.triangular(0.1771, 0.215, 0.2529, s))
+PW_MW_y13_data = (nr.triangular(0.1163, 0.208, 0.2997, s))
+PW_MW_y14_data = (nr.triangular(0.1191, 0.213, 0.3069, s))
+PW_MW_y15_data = (nr.triangular(0.1191, 0.213, 0.3069, s))
+PW_MW_y16_data = (nr.triangular(0.0718, 0.141, 0.2102, s))
+PW_MW_y17_data = (nr.triangular(0.0585, 0.117, 0.1755, s))
+PW_MW_y18_data = (nr.triangular(0.0465, 0.093, 0.1395, s))
+PW_MW_y19_data = (nr.triangular(0.0345, 0.069, 0.1035, s))
+PW_MW_y20_data = (nr.triangular(0.023, 0.046, 0.069, s))
 
 PW_MW_y0 = cp.TransferDistribution(nr.choice, [PW_MW_y0_data])
 PW_MW_y1 = cp.TransferDistribution(nr.choice, [PW_MW_y1_data])
@@ -1635,29 +1709,28 @@ PackW.transfers = [cp.TimeDependendDistributionTransfer([PW_MW_y0,
 # Mean of this value for Europe in year 2014: 40% (this model).
 # It results a scaling factor of 2.329.
 # The overall distributions must not exceed 1, so 0.429 (=1/2.329) before multiplication by 2.329
-SF_WE_SO = 2.329
 
-WE_S_y0_data = SF_WE_SO*(nr.triangular(0.015, 0.03, 0.045, s))
-WE_S_y1_data = SF_WE_SO*(nr.triangular(0.0335, 0.067, 0.1005, s))
-WE_S_y2_data = SF_WE_SO*(nr.triangular(0.0515, 0.103, 0.1545, s))
-WE_S_y3_data = SF_WE_SO*(nr.triangular(0.07, 0.14, 0.21, s))
-WE_S_y4_data = SF_WE_SO*(nr.triangular(0.0907, 0.177, 0.2633, s))
-WE_S_y5_data = SF_WE_SO*(tf.TriangTruncDet(0.1766, 0.314, 0.4514, s, 0, 0.429))
-WE_S_y6_data = SF_WE_SO*(tf.TriangTruncDet(0.1912, 0.319, 0.4468, s, 0, 0.429))
-WE_S_y7_data = SF_WE_SO*(nr.triangular(0.2231, 0.325, 0.4269, s))
-WE_S_y8_data = SF_WE_SO*(nr.triangular(0.2718, 0.33, 0.3882, s))
-WE_S_y9_data = SF_WE_SO*(nr.triangular(0.273, 0.35, 0.427, s))
-WE_S_y10_data = SF_WE_SO*(tf.TriangTruncDet(0.3095, 0.37, 0.4305, s, 0, 0.429))
-WE_S_y11_data = SF_WE_SO*(tf.TriangTruncDet(0.2566, 0.395, 0.5334, s, 0, 0.429))
-WE_S_y12_data = SF_WE_SO*(tf.TriangTruncDet(0.2363, 0.42, 0.6038, s, 0, 0.429))
-WE_S_y13_data = SF_WE_SO*(tf.TriangTruncDet(0.2663, 0.41, 0.5537, s, 0, 0.429))
-WE_S_y14_data = SF_WE_SO*(tf.TriangTruncDet(0.3346, 0.4, 0.4654, s, 0, 0.429))
-WE_S_y15_data = SF_WE_SO*(tf.TriangTruncDet(0.3582, 0.49, 0.6218, s, 0, 0.429))
-WE_S_y16_data = SF_WE_SO*(tf.TriangTruncDet(0.3628, 0.58, 0.7972, s, 0, 0.429))
-WE_S_y17_data = SF_WE_SO*(tf.TriangTruncDet(0.3819, 0.67, 0.9581, s, 0, 0.429))
-WE_S_y18_data = SF_WE_SO*(tf.TriangTruncDet(0.3819, 0.67, 0.9581, s, 0, 0.429))
-WE_S_y19_data = SF_WE_SO*(tf.TriangTruncDet(0.3819, 0.67, 0.9581, s, 0, 0.429))
-WE_S_y20_data = SF_WE_SO*(tf.TriangTruncDet(0.3819, 0.67, 0.9581, s, 0, 0.429))
+WE_S_y0_data = (nr.triangular(0.015, 0.03, 0.045, s))
+WE_S_y1_data = (nr.triangular(0.0335, 0.067, 0.1005, s))
+WE_S_y2_data = (nr.triangular(0.0515, 0.103, 0.1545, s))
+WE_S_y3_data = (nr.triangular(0.07, 0.14, 0.21, s))
+WE_S_y4_data = (nr.triangular(0.0907, 0.177, 0.2633, s))
+WE_S_y5_data = (tf.TriangTruncDet(0.1766, 0.314, 0.4514, s, 0, 0.429))
+WE_S_y6_data = (tf.TriangTruncDet(0.1912, 0.319, 0.4468, s, 0, 0.429))
+WE_S_y7_data = (nr.triangular(0.2231, 0.325, 0.4269, s))
+WE_S_y8_data = (nr.triangular(0.2718, 0.33, 0.3882, s))
+WE_S_y9_data = (nr.triangular(0.273, 0.35, 0.427, s))
+WE_S_y10_data = (tf.TriangTruncDet(0.3095, 0.37, 0.4305, s, 0, 0.429))
+WE_S_y11_data = (tf.TriangTruncDet(0.2566, 0.395, 0.5334, s, 0, 0.429))
+WE_S_y12_data = (tf.TriangTruncDet(0.2363, 0.42, 0.6038, s, 0, 0.429))
+WE_S_y13_data = (tf.TriangTruncDet(0.2663, 0.41, 0.5537, s, 0, 0.429))
+WE_S_y14_data = (tf.TriangTruncDet(0.3346, 0.4, 0.4654, s, 0, 0.429))
+WE_S_y15_data = (tf.TriangTruncDet(0.3582, 0.49, 0.6218, s, 0, 0.429))
+WE_S_y16_data = (tf.TriangTruncDet(0.3628, 0.58, 0.7972, s, 0, 0.429))
+WE_S_y17_data = (tf.TriangTruncDet(0.3819, 0.67, 0.9581, s, 0, 0.429))
+WE_S_y18_data = (tf.TriangTruncDet(0.3819, 0.67, 0.9581, s, 0, 0.429))
+WE_S_y19_data = (tf.TriangTruncDet(0.3819, 0.67, 0.9581, s, 0, 0.429))
+WE_S_y20_data = (tf.TriangTruncDet(0.3819, 0.67, 0.9581, s, 0, 0.429))
 
 WE_S_y0 = cp.TransferDistribution(nr.choice, [WE_S_y0_data])
 WE_S_y1 = cp.TransferDistribution(nr.choice, [WE_S_y1_data])
@@ -1699,29 +1772,28 @@ WEEE.transfers = [cp.TimeDependendDistributionTransfer([WE_S_y0,
 # Eurostat, for year 2014: 28.82% goes to sorting in the UK.
 # Mean of this value for Europe in year 2014: 30% (this model).
 # It results a scaling factor of 0.961.
-SF_TW_SO = 0.961
              
-TW_S_y0_data = (nr.triangular(0.024, 0.048, 0.072, s))*SF_TW_SO
-TW_S_y1_data = (nr.triangular(0.0345, 0.069, 0.1035, s))*SF_TW_SO
-TW_S_y2_data = (nr.triangular(0.0455, 0.091, 0.1365, s))*SF_TW_SO
-TW_S_y3_data = (nr.triangular(0.0574, 0.112, 0.1666, s))*SF_TW_SO
-TW_S_y4_data = (nr.triangular(0.1515, 0.19, 0.2285, s))*SF_TW_SO
-TW_S_y5_data = (nr.triangular(0.1486, 0.198, 0.2474, s))*SF_TW_SO
-TW_S_y6_data = (nr.triangular(0.1443, 0.205, 0.2657, s))*SF_TW_SO
-TW_S_y7_data = (nr.triangular(0.1400, 0.213, 0.2860, s))*SF_TW_SO
-TW_S_y8_data = (nr.triangular(0.1343, 0.22, 0.3057, s))*SF_TW_SO
-TW_S_y9_data = (nr.triangular(0.1513, 0.228, 0.3047, s))*SF_TW_SO
-TW_S_y10_data = (nr.triangular(0.1685, 0.235, 0.3015, s))*SF_TW_SO
-TW_S_y11_data = (nr.triangular(0.1872, 0.243, 0.2988, s))*SF_TW_SO
-TW_S_y12_data = (nr.triangular(0.2059, 0.25, 0.2941, s))*SF_TW_SO
-TW_S_y13_data = (nr.triangular(0.2139, 0.275, 0.3361, s))*SF_TW_SO
-TW_S_y14_data = (nr.triangular(0.2197, 0.3, 0.3804, s))*SF_TW_SO
-TW_S_y15_data = (nr.triangular(0.2556, 0.325, 0.3944, s))*SF_TW_SO
-TW_S_y16_data = (nr.triangular(0.2928, 0.35, 0.4072, s))*SF_TW_SO
-TW_S_y17_data = (nr.triangular(0.3133, 0.405, 0.4967, s))*SF_TW_SO
-TW_S_y18_data = (nr.triangular(0.3268, 0.46, 0.5932, s))*SF_TW_SO
-TW_S_y19_data = (nr.triangular(0.3850, 0.515, 0.6450, s))*SF_TW_SO
-TW_S_y20_data = (nr.triangular(0.4546, 0.57, 0.6854, s))*SF_TW_SO
+TW_S_y0_data = (nr.triangular(0.024, 0.048, 0.072, s))
+TW_S_y1_data = (nr.triangular(0.0345, 0.069, 0.1035, s))
+TW_S_y2_data = (nr.triangular(0.0455, 0.091, 0.1365, s))
+TW_S_y3_data = (nr.triangular(0.0574, 0.112, 0.1666, s))
+TW_S_y4_data = (nr.triangular(0.1515, 0.19, 0.2285, s))
+TW_S_y5_data = (nr.triangular(0.1486, 0.198, 0.2474, s))
+TW_S_y6_data = (nr.triangular(0.1443, 0.205, 0.2657, s))
+TW_S_y7_data = (nr.triangular(0.1400, 0.213, 0.2860, s))
+TW_S_y8_data = (nr.triangular(0.1343, 0.22, 0.3057, s))
+TW_S_y9_data = (nr.triangular(0.1513, 0.228, 0.3047, s))
+TW_S_y10_data = (nr.triangular(0.1685, 0.235, 0.3015, s))
+TW_S_y11_data = (nr.triangular(0.1872, 0.243, 0.2988, s))
+TW_S_y12_data = (nr.triangular(0.2059, 0.25, 0.2941, s))
+TW_S_y13_data = (nr.triangular(0.2139, 0.275, 0.3361, s))
+TW_S_y14_data = (nr.triangular(0.2197, 0.3, 0.3804, s))
+TW_S_y15_data = (nr.triangular(0.2556, 0.325, 0.3944, s))
+TW_S_y16_data = (nr.triangular(0.2928, 0.35, 0.4072, s))
+TW_S_y17_data = (nr.triangular(0.3133, 0.405, 0.4967, s))
+TW_S_y18_data = (nr.triangular(0.3268, 0.46, 0.5932, s))
+TW_S_y19_data = (nr.triangular(0.3850, 0.515, 0.6450, s))
+TW_S_y20_data = (nr.triangular(0.4546, 0.57, 0.6854, s))
 
 TW_S_y0 = cp.TransferDistribution(nr.choice, [TW_S_y0_data])
 TW_S_y1 = cp.TransferDistribution(nr.choice, [TW_S_y1_data])
