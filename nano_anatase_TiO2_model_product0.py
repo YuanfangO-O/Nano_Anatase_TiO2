@@ -20,7 +20,7 @@ import TruncatingFunctions as tf
 # In[5]:
 
 
-model = Model.Model('nano-TiO2 AUT from 2000 to 2020')
+model = Model.Model('nano-TiO2 anatase from 2000 to 2020')
 
 
 # In[6]:
@@ -578,18 +578,18 @@ Productiondata.shape
 # Production for the whole Europe:
 Productiondata_EU = Productiondata.values #in earlier code as " Productiondata = Productiondata.as_matrix(Productiondata)
 # Scaling production for the UK only:
-Productiondata_AUT = Productiondata_EU*0
+Productiondata_anatase = Productiondata_EU*0.238
 # Putting the numbers in the model:
 Productionvolume_EU = []
-Productionvolume_AUT = []
-for i in np.arange(0,31):
+Productionvolume_anatase = []
+for i in np.arange(0,21):
     Productionvolume_EU.append(Productiondata_EU[:,i])
-    Productionvolume_AUT.append(Productiondata_AUT[:,i])
+    Productionvolume_anatase.append(Productiondata_anatase[:,i])
 #model.addInflow(cp.ExternalListInflow(totalInflow, inflowList=Productionvolume))   
-periodRange = np.arange(0,31)
+periodRange = np.arange(0,21)
 
 # Setting inflow to production
-model.addInflow(cp.ExternalListInflow(totalInflow, [cp.RandomChoiceInflow(Productionvolume_AUT[x]) for x in periodRange]))
+model.addInflow(cp.ExternalListInflow(totalInflow, [cp.RandomChoiceInflow(Productionvolume_anatase[x]) for x in periodRange]))
 
 # Adding imports. (country-specific)
 SF_Prod = 0
