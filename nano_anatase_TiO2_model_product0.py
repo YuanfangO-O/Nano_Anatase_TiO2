@@ -592,11 +592,11 @@ periodRange = np.arange(0,21)
 model.addInflow(cp.ExternalListInflow(totalInflow, [cp.RandomChoiceInflow(Productionvolume_anatase[x]) for x in periodRange]))
 
 # Adding imports. (country-specific)
-SF_Prod = 0
-SF_Manuf = nr.triangular(0.0146*(1-0.22), 0.0146, 0.0146*(1+0.22), 10000)
-SF_Cons = nr.triangular(0.0165*(1-0.34), 0.0165, 0.0165*(1+0.34), 10000)
-model.addInflow(cp.ExternalListInflow(Import_Manuf, [cp.RandomChoiceInflow(Productionvolume_EU[x]*(SF_Manuf-SF_Prod)) for x in periodRange]))
-model.addInflow(cp.ExternalListInflow(Import_Cons, [cp.RandomChoiceInflow(Productionvolume_EU[x]*(SF_Cons-SF_Manuf)) for x in periodRange]))
+#SF_Prod = 0
+#SF_Manuf = 0
+#SF_Cons = 0
+model.addInflow(cp.ExternalListInflow(Import_Manuf, [cp.RandomChoiceInflow(Productionvolume_anatase[x]) for x in periodRange]))
+model.addInflow(cp.ExternalListInflow(Import_Cons, [cp.RandomChoiceInflow(Productionvolume_anatase[x]) for x in periodRange]))
 
 
 # In[22]:
