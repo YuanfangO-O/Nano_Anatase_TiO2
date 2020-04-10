@@ -19,7 +19,7 @@ Speriod=20        # specific period for concentrations and Mass-flows, either 14
 # In[2]:
 
 
-import nano_anatase_TiO2_model as TiO2model # here space is not allowed in model name
+import nano_anatase_TiO2_model_product0 as TiO2model # here space is not allowed in model name
 import Simulator as sc
 import numpy as np
 import matplotlib.pyplot as plt
