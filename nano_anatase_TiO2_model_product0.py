@@ -620,9 +620,11 @@ Production.transfers = [cp.StochasticTransfer(nr.triangular, [0.0002, 0.0125, 0.
                         cp.ConstTransfer(1, Manufacture, priority=1)]
 
 # Allocate manufactured products to different categories:
-Tot_Manuf_Solids = nr.triangular(0, 0.0286, 0.05, 10000) + nr.triangular(0, 0.0033, 0.01, 10000) + nr.triangular(0.01, 0.0183, 0.03, 10000)
-Tot_Manuf_Liquids = nr.triangular(0.72, 0.76, 0.81, 10000) + nr.triangular(0, 0.0508, 0.1, 10000) + 2*(nr.triangular(0, 0.0286, 0.05, 10000))
-+ nr.triangular(0, 0.0083, 0.02, 10000) + nr.triangular(0, 0.0483, 0.14, 10000)
+
+#Manuf_Solids: cement, solar
+Tot_Manuf_Solids = nr.triangular(0.06, 0.067, 0.08, 10000) + nr.triangular(0.00, 0.084, 0.17, 10000) 
+#Manuf_Liquids: Outpaints, Inpaintes, Glass, Ceramics
+Tot_Manuf_Liquids = nr.triangular(0.18, 0.214, 0.44, 10000) + nr.triangular(0.32, 0.391, 0.46, 10000) + 2*(nr.triangular(0.10, 0.122, 0.14, 10000)) 
 
 Manufacture.transfers = [cp.StochasticTransfer(nr.triangular, [0, 0.0233, 0.05], Manuf_Plas, priority=2),
                         cp.StochasticTransfer(nr.triangular, [0, 0.0017, 0.01], Manuf_Text, priority=2),
@@ -657,18 +659,18 @@ manuf_plastics_waste.transfers = [cp.RandomChoiceTransfer(tf.TriangTruncDet(0.45
 
 
 # ENM allocation to product categories
-Consumption.transfers = [cp.StochasticTransfer(nr.triangular, [0.72, 0.76, 0.81], PersCare),
-                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0508, 0.10], OutPaints),
-                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0508, 0.10], InPaints),
-                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0286, 0.05], Cement),
-                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0286, 0.05], Glass),
-                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0286, 0.05], Ceramics),
-                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0233, 0.05], RubPlas),
-                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0033, 0.01], Solar),
-                         cp.StochasticTransfer(nr.triangular, [0.01, 0.0183, 0.03], Electronics),
-                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0083, 0.02], CleanAgents),
-                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0483, 0.14], Food),
-                         cp.StochasticTransfer(nr.triangular, [0.00, 0.0017, 0.01], Textiles)]
+Consumption.transfers = [cp.StochasticTransfer(nr.triangular, [0.00, 0.00, 0.00], PersCare),
+                         cp.StochasticTransfer(nr.triangular, [0.00, 0.00, 0.00], RubPlas),
+                         cp.StochasticTransfer(nr.triangular, [0.00, 0.00, 0.00], Electronics),
+                         cp.StochasticTransfer(nr.triangular, [0.00, 0.00, 0.00], CleanAgents),
+                         cp.StochasticTransfer(nr.triangular, [0.00, 0.00, 0.00], Food),
+                         cp.StochasticTransfer(nr.triangular, [0.00, 0.00, 0.00], Textiles),
+                         cp.StochasticTransfer(nr.triangular, [0.18, 0.214, 0.44], OutPaints),
+                         cp.StochasticTransfer(nr.triangular, [0.32, 0.391, 0.46], InPaints),
+                         cp.StochasticTransfer(nr.triangular, [0.06, 0.067, 0.08], Cement),
+                         cp.StochasticTransfer(nr.triangular, [0.10, 0.122, 0.14], Glass),
+                         cp.StochasticTransfer(nr.triangular, [0.10, 0.122, 0.14], Ceramics),
+                         cp.StochasticTransfer(nr.triangular, [0.00, 0.084, 0.17], Solar)]
 
 
 # In[25]:
