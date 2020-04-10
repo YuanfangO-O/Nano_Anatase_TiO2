@@ -468,7 +468,7 @@ compartmentList=[totalInflow,
                  WIP_Air_N, WIP_Air_T,
                  
                  
-                STPSlud_Landfill_N, STPSlud_Landfill_M, STPSlud_Landfill_T,
+                 STPSlud_Landfill_N, STPSlud_Landfill_M, STPSlud_Landfill_T,
                  MMSW_Landfill_P, CDW_Landfill_P, SortCDWGlass_Landfill_P, SortCDWMiner_Landfill_P, SortDisp_Landfill_P,
                  SortMiner_Landfill_P, Filterash_Landfill_N, Filterash_Landfill_T, Bottomash_Landfill_N, Bottomash_Landfill_T,
                  
