@@ -55,7 +55,8 @@ class Model(object):
         if all(isinstance(inflow, cp.ExternalInflow) for inflow in inflows):
             self.inflows = inflows
         else: 
-            print('invalid inflow list!')   
+            print('invalid inflow list!')  
+
 
         self.seed = 1
         self.categoriesList = []
@@ -221,6 +222,10 @@ class Model(object):
                 for trans in transferList:
                     if not isinstance(trans, cp.Transfer):
                         print('invalid transfer')
+                        print('trans is')
+                        self.t1 = trans
+                        print('cp.Transfer is')
+                        self.t2 = cp.Transfer
             
             if isinstance(comp, cp.Stock):
                 release = comp.localRelease
